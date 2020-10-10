@@ -19,7 +19,7 @@ import {
   zero,
   label,
 } from './lib';
-import chrtGeneric from '../chrtGeneric';
+import { chrtGeneric } from 'chrt-core';
 
 const DEFAULT_LINE_WIDTH = 1;
 const DEAULT_LINE_COLOR = '#000';
