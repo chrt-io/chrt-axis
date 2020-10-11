@@ -1,7 +1,7 @@
 {
   "name": "chrt-axis",
-  "version": "1.0.0",
-  "description": "small atomic charting components",
+  "version": "0.0.0",
+  "description": "Axis component for Chrt",
   "main": "dist/chrt-axis.js",
   "module": "src/index.j",
   "watch": {
