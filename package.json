@@ -1,6 +1,6 @@
 {
   "name": "chrt-axis",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Axis component for Chrt",
   "main": "dist/chrt-axis.js",
   "module": "src/index.j",
