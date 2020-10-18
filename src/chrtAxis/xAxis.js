@@ -37,7 +37,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT) {
     if(this._label) {
       this._label.tickIndex = -1;
     }
-    const ticks = scales[name]
+    let ticks = scales[name]
       .ticks(ticksNumber * 2)
       .map((tick, i , arr) => {
         tick.position = scales[name](tick.value);
@@ -60,7 +60,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT) {
 
         return tick;
       })
-      .filter((tick, i, arr) => this.ticksFilter ? this.ticksFilter(tick.value, i, arr) : true);
+      // .filter((tick, i, arr) => this.ticksFilter ? this.ticksFilter(tick.value, i, arr) : true);
 
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);
     const axisY =
