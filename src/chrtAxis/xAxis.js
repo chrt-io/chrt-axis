@@ -14,12 +14,12 @@ function xAxis(ticksNumber = TICKS_DEFAULT) {
 
     const orientation =
       this.orientation === DEFAULT_ORIENTATION[this.name] ? 1 : -1;
-
-    tickLine.setAttribute('x1', 0);
-    tickLine.setAttribute('x2', 0);
-    tickLine.setAttribute('y1', 0);
-    tickLine.setAttribute('y2', this.tickLength * orientation);
-
+    if(tickLine) {
+      tickLine.setAttribute('x1', 0);
+      tickLine.setAttribute('x2', 0);
+      tickLine.setAttribute('y1', 0);
+      tickLine.setAttribute('y2', this.tickLength * orientation);
+    }
     const label = tickGroup.querySelector('text');
     label.setAttribute('text-anchor', 'middle');
     label.setAttribute('y', this.tickLength * orientation);
