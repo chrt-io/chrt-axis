@@ -26,7 +26,7 @@ function chrtAxisRange() {
   this._range = {};
 
   this.draw = () => {
-    console.log('chrtAxisRange draw', this);
+    // console.log('chrtAxisRange draw', this);
     if (!this.parentNode.parentNode.scales) {
       return this.parentNode.parentNode;
     }

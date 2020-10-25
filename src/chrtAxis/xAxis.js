@@ -60,6 +60,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT) {
 
         return tick;
       })
+      .filter(d => d.visible) // decrease the number of ticks rendered in the DOM
       // .filter((tick, i, arr) => this.ticksFilter ? this.ticksFilter(tick.value, i, arr) : true);
 
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);

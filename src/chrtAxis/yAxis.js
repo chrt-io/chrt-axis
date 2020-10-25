@@ -89,11 +89,11 @@ function yAxis(ticksNumber = TICKS_DEFAULT) {
 
         return tick;
       })
-      // .filter(tick => tick.visible) // TO BE REVIEWED
+      .filter(d => d.visible) // decrease the number of ticks rendered in the DOM
       // .filter((tick, i, arr) => this.ticksFilter ? this.ticksFilter(tick.value, i, arr) : true);
-    
+
     // console.log('Y AXIS TICKS', ticks)
-    
+
     let axisLine = this.g.querySelector(`[data-id='tick-${name}-axis-line']`);
     if (!axisLine) {
       axisLine = create('line');
