@@ -120,4 +120,7 @@ chrtAxisRange.prototype = Object.assign(chrtAxisRange.prototype, {
   to,
 });
 
-export default chrtAxisRange;
+// export default chrtAxisRange;
+export default function() {
+  return new chrtAxisRange();
+}

@@ -142,4 +142,8 @@ yAxis.prototype = Object.create(chrtAxis.prototype);
 yAxis.prototype.constructor = yAxis;
 yAxis.parent = chrtAxis.prototype;
 
-export default yAxis;
+// export default yAxis;
+
+export default function(ticksNumber) {
+  return new yAxis(ticksNumber);
+}

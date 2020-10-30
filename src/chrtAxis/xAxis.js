@@ -118,4 +118,8 @@ xAxis.prototype = Object.create(chrtAxis.prototype);
 xAxis.prototype.constructor = xAxis;
 xAxis.parent = chrtAxis.prototype;
 
-export default xAxis;
+// export default xAxis;
+
+export default function(ticksNumber) {
+  return new xAxis(ticksNumber);
+}
