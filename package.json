@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "description": "Axis component for Chrt",
   "main": "dist/chrt-axis.js",
-  "module": "src/index.j",
+  "module": "dist/chrt-axis.esm.js",
   "watch": {
     "build": {
       "patterns": [
