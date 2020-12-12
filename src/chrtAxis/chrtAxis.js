@@ -8,6 +8,7 @@ import {
   setTickPosition,
   showAxis,
   hideAxis,
+  ticks,
   showTicks,
   hideTicks,
   firstTick,
@@ -45,6 +46,8 @@ function chrtAxis(name) {
   this.showMinorTicks = false;
   this.showZero = true;
   this._label = null;
+  this._ticks = [];
+  this._fixedTicks = null;
 
   this.draw = () => {
     if (!this.parentNode.scales[name]) {
@@ -65,6 +68,7 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   setTickPosition,
   showAxis,
   hideAxis,
+  ticks,
   filter: showTicks,
   showTicks,
   hideTicks,

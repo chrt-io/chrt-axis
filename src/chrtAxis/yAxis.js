@@ -1,3 +1,4 @@
+import { isNull } from '~/helpers';
 import { createSVG as create } from '~/layout';
 import generateTicks from './lib/generateTicks';
 import chrtAxis from './chrtAxis';
@@ -64,10 +65,11 @@ function yAxis(ticksNumber = TICKS_DEFAULT) {
     if(this._label) {
       this._label.tickIndex = -1;
     }
-    // console.log('AXIS', scales[name].ticks(ticksNumber * 2))
-    const ticks = scales[name]
-      //.ticks(ticksNumber * (this.showMinorTicks ? 2 : 1))
-      .ticks(ticksNumber * 2)
+    const ticks = scales[name].ticks(this._fixedTicks || ticksNumber * 2);
+    if(this._label && this._label.position === 'last') {
+      ticks.reverse();
+    }
+    this._ticks = ticks
       .map((tick, i , arr) => {
         tick.position = scales[name](tick.value);
         let visible =
@@ -82,10 +84,20 @@ function yAxis(ticksNumber = TICKS_DEFAULT) {
 
         tick.label = null;
 
-        if(tick.visible && this._label && this._label.tickIndex === -1) {
-          tick.label = this._label;
-          this._label.tickIndex = tick.index;
+        if(tick.visible && this._label) {
+          if(!isNull(this._label.value) && this._label.value === tick.value) {
+            tick.label = this._label;
+            this._label.tickIndex = tick.index;
+          }
         }
+
+        if(tick.visible && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
+          if(!isNull(this._label.position)) {
+            tick.label = this._label;
+            this._label.tickIndex = tick.index;
+          }
+        }
+
 
         return tick;
       })
@@ -121,13 +133,13 @@ function yAxis(ticksNumber = TICKS_DEFAULT) {
     this.g.querySelectorAll('g').forEach(d => {
       const tickName = d.getAttribute('data-id');
 
-      const tick = ticks.find(tick => tickName === `tick-${name}-${tick}`);
+      const tick = this._ticks.find(tick => tickName === `tick-${name}-${tick}`);
 
       if(!tick) {
         d.remove();
       }
     })
-    generateTicks.call(this, ticks, name, (tickGroup, tick) => {
+    generateTicks.call(this, this._ticks, name, (tickGroup, tick) => {
       tickGroup.setAttribute('transform', `translate(0, ${tick.position})`);
       yAxisTick(tickGroup, tick.visible);
     });
