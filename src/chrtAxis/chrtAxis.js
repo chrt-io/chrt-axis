@@ -1,7 +1,4 @@
 import {
-  DEFAULT_ORIENTATION
-} from '~/constants';
-import {
   lineColor,
   lineWidth,
   setTickLength,
@@ -41,7 +38,6 @@ function chrtAxis(name) {
   this.ticksFilter = null;
   this.tickLength = TICK_LENGTH;
   this.tickPosition = TICK_POSITION;
-  this.orientation = DEFAULT_ORIENTATION[name];
   this.labelFormat = d => d;
   this.showMinorTicks = false;
   this.showZero = true;
@@ -50,7 +46,7 @@ function chrtAxis(name) {
   this._fixedTicks = null;
 
   this.draw = () => {
-    if (!this.parentNode.scales[name]) {
+    if (!this.parentNode.scales[this._coordinates][name]) {
       return this.parentNode;
     }
     return this.parentNode;

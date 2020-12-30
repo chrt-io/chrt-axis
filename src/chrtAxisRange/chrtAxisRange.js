@@ -48,9 +48,11 @@ function chrtAxisRange() {
 
     let from = null;
     let to = null;
-    if (scales && scales['x']) {
-      from = isNull(this._range.from) ? from : scales['x'](this._range.from);
-      to = isNull(this._range.to) ? to : scales['x'](this._range.to);
+    console.log('chrtAxisRange')
+    if (scales && scales.x[this.parentNode.name]) {
+      const _scale = scales.x[this.parentNode.name];
+      from = isNull(this._range.from) ? from : _scale(this._range.from);
+      to = isNull(this._range.to) ? to : _scale(this._range.to);
     }
 
     if (!this.path) {

@@ -4,15 +4,19 @@ import generateTicks from './lib/generateTicks';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
 
-function yAxis(ticksNumber = TICKS_DEFAULT) {
-  chrtAxis.call(this, 'y');
+function yAxis(ticksNumber, customName = 'y') {
+  ticksNumber = isNull(ticksNumber) ? TICKS_DEFAULT : ticksNumber;
+  chrtAxis.call(this, customName, 'y');
   const name = this.name;
+  this._name = 'y';
+  this._coordinates  = 'y';
+  this.orientation = DEFAULT_ORIENTATION[this._name];
 
   const yAxisTick = (tickGroup, visible) => {
     tickGroup.style.display = visible ? 'block' : 'none';
 
     const orientation =
-      this.orientation === DEFAULT_ORIENTATION[this.name] ? 1 : -1;
+      this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
 
     const tickLine = tickGroup.querySelector('line');
@@ -53,25 +57,25 @@ function yAxis(ticksNumber = TICKS_DEFAULT) {
   };
 
   this.draw = () => {
-    if (!this.parentNode.scales[name]) {
+    if (!this.parentNode.scales.y[name]) {
       return this.parentNode;
     }
     const { _margins, scales, width, height } = this.parentNode;
 
     this.g.setAttribute('id', `${name}Axis${this.id()}`);
     const axisX =
-      this.orientation === DEFAULT_ORIENTATION[this.name] ? _margins.left : width - _margins.right;
+      this.orientation === DEFAULT_ORIENTATION[this._name] ? _margins.left : width - _margins.right;
     this.g.setAttribute('transform', `translate(${axisX},0)`);
     if(this._label) {
       this._label.tickIndex = -1;
     }
-    const ticks = scales[name].ticks(this._fixedTicks || ticksNumber * 2);
+    const ticks = scales.y[name].ticks(this._fixedTicks || ticksNumber * 2);
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }
     this._ticks = ticks
       .map((tick, i , arr) => {
-        tick.position = scales[name](tick.value);
+        tick.position = scales.y[name](tick.value);
         let visible =
           tick.position >= _margins.top && tick.position <= (height - _margins.bottom);
         visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
@@ -129,7 +133,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT) {
       axisLine.remove();
     }
 
-    const isLog = scales[name].isLog();
+    const isLog = scales.y[name].isLog();
     this.g.querySelectorAll('g').forEach(d => {
       const tickName = d.getAttribute('data-id');
 
@@ -156,6 +160,6 @@ yAxis.parent = chrtAxis.prototype;
 
 // export default yAxis;
 
-export default function(ticksNumber) {
-  return new yAxis(ticksNumber);
+export default function(ticksNumber, customName) {
+  return new yAxis(ticksNumber, customName);
 }
