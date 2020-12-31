@@ -98,7 +98,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     axisLine.setAttribute('x1', _margins.left);
     axisLine.setAttribute('x2', width - _margins.right);
     const scaleY = scales.y['y'] || Object.values(scales.y)[0];
-    const axisLineY = scaleY.isLog() ? scaleY.range[1] : scaleY(0) - (height - _margins.bottom);
+    const axisLineY = scaleY.isLog() ? scaleY.range[1] : scaleY(this._zero) - (height - _margins.bottom);
 
     axisLine.setAttribute('y1', !isNaN(axisLineY) ? axisLineY : 0);
     axisLine.setAttribute('y2', !isNaN(axisLineY) ? axisLineY : 0);

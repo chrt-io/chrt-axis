@@ -1,13 +1,21 @@
 import { isNull } from '~/helpers';
-export default function minor(value = true) {
+export default function zero(value) {
   if(isNull(value)) {
-    return this.showZero;
+    return this._zero;
   }
 
   if (typeof value === 'function') {
     // something will go here
   } else {
-    this.showZero = value;
+    this._zero = value;
+  }
+  return this;
+}
+export function hideZero(value = true) {
+  if (typeof value === 'function') {
+    // something will go here
+  } else {
+    this.showZero = !value;
   }
   return this;
 }

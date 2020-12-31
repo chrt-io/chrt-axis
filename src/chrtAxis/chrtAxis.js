@@ -15,6 +15,7 @@ import {
   format,
   minor,
   zero,
+  hideZero,
   label,
 } from './lib';
 import { chrtGeneric } from 'chrt-core';
@@ -40,6 +41,7 @@ function chrtAxis(name) {
   this.tickPosition = TICK_POSITION;
   this.labelFormat = d => d;
   this.showMinorTicks = false;
+  this._zero = 0;
   this.showZero = true;
   this._label = null;
   this._ticks = [];
@@ -75,6 +77,7 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   format,
   minor,
   zero,
+  hideZero,
   label,
 });
 

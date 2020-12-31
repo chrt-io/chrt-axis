@@ -8,5 +8,5 @@ export { default as ticks, showTicks, hideTicks, firstTick, lastTick, firstAndLa
 export { default as orient } from './orientation';
 export { default as format } from './labelFormat';
 export { default as minor } from './minor';
-export { default as zero } from './zero';
+export { default as zero, hideZero } from './zero';
 export { default as label } from './label';
