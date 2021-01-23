@@ -41,7 +41,8 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     if(this._label) {
       this._label.tickIndex = -1;
     }
-    const ticks = scales.x[name].ticks(this._fixedTicks || ticksNumber * 2);
+
+    const ticks = scales.x[name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }

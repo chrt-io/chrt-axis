@@ -69,7 +69,8 @@ function yAxis(ticksNumber, customName = 'y') {
     if(this._label) {
       this._label.tickIndex = -1;
     }
-    const ticks = scales.y[name].ticks(this._fixedTicks || ticksNumber * 2);
+
+    const ticks = scales.y[name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }

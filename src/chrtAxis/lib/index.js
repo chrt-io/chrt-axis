@@ -10,3 +10,4 @@ export { default as format } from './labelFormat';
 export { default as minor } from './minor';
 export { default as zero, hideZero } from './zero';
 export { default as label } from './label';
+export { default as interval } from './interval';
