@@ -11,12 +11,13 @@ function yAxis(ticksNumber, customName = 'y') {
   this._name = 'y';
   this._coordinates  = 'y';
   this.orientation = DEFAULT_ORIENTATION[this._name];
+  this._classNames = [...this._classNames,'chrt-y-axis'];
 
   const yAxisTick = (tickGroup, visible) => {
     tickGroup.style.display = visible ? 'block' : 'none';
 
     const orientation =
-      this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
+    this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
 
     const tickLine = tickGroup.querySelector('line');
@@ -47,7 +48,7 @@ function yAxis(ticksNumber, customName = 'y') {
     );
     label.setAttribute(
       'dx',
-      `${(this.tickPosition === 'outside' ? -2 : 2) * orientation}px`
+      `${(this.tickPosition === 'outside' ? -5 : 5) * orientation}px`
     );
     label.setAttribute(
       'dy',
@@ -63,6 +64,8 @@ function yAxis(ticksNumber, customName = 'y') {
     const { _margins, scales, width, height } = this.parentNode;
 
     this.g.setAttribute('id', `${name}Axis${this.id()}`);
+    this._classNames.forEach(d => this.g.classList.add(d));
+    
     const axisX =
       this.orientation === DEFAULT_ORIENTATION[this._name] ? _margins.left : width - _margins.right;
     this.g.setAttribute('transform', `translate(${axisX},0)`);
@@ -132,6 +135,52 @@ function yAxis(ticksNumber, customName = 'y') {
     // if no axis remove the axis line after creating it
     if (!this.showAxisLine) {
       axisLine.remove();
+    }
+
+    const title = this.attr('title') ? this.attr('title')() : null;
+    if(!isNull(title)) {
+      let axisTitleText = this.g.querySelector('text.title');
+      if(isNull(axisTitleText)) {
+        axisTitleText = create('text');
+        axisTitleText.classList.add('title');
+      }
+      axisTitleText.textContent = title;
+
+      const orientation =
+        this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
+
+      let x = (this.tickPosition === 'outside' ? -this.tickLength : 0) * orientation;
+
+      axisTitleText.setAttribute('x', x)
+      axisTitleText.setAttribute('y', _margins.top)
+      axisTitleText.setAttribute('dy', this.tickPosition === 'outside' ? "0.9em" : "-0.9em")
+      axisTitleText.setAttribute('dx', this.tickPosition === 'outside' ? `${5 * orientation}px` : `${-2 * orientation}px`)
+
+
+
+      axisTitleText.setAttribute(
+        'text-anchor',
+          this.tickPosition === 'inside'
+            ? orientation
+              ? 'end'
+              : 'start'
+            : orientation
+            ? 'start'
+            : 'end'
+      );
+
+      // axisTitleText.setAttribute(
+      //   'text-anchor',
+      //   this.tickPosition === 'outside'
+      //     ? ~orientation
+      //       ? 'end'
+      //       : 'start'
+      //     : ~orientation
+      //     ? 'start'
+      //     : 'end'
+      // );
+
+      this.g.appendChild(axisTitleText);
     }
 
     const isLog = scales.y[name].isLog();

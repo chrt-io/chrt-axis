@@ -11,6 +11,8 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
   this._coordinates = 'x';
   this.orientation = DEFAULT_ORIENTATION[this._name];
 
+  this._classNames = [...this._classNames,'chrt-x-axis'];
+
   const xAxisTick = (tickGroup, visible) => {
     tickGroup.style.display = visible ? 'block' : 'none';
 
@@ -80,6 +82,8 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       // .filter((tick, i, arr) => this.ticksFilter ? this.ticksFilter(tick.value, i, arr) : true);
 
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);
+    this._classNames.forEach(d => this.g.classList.add(d));
+
     const axisY =
       this.orientation === DEFAULT_ORIENTATION[this._name]
         ? height - _margins.bottom
@@ -107,6 +111,45 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     // if no axis remove the axis line after creating it
     if (!this.showAxisLine) {
       axisLine.remove();
+    }
+
+    const title = this.attr('title') ? this.attr('title')() : null;
+    if(!isNull(title)) {
+      let axisTitleText = this.g.querySelector('text.title');
+      if(isNull(axisTitleText)) {
+        axisTitleText = create('text');
+        axisTitleText.classList.add('title');
+      }
+      axisTitleText.textContent = title;
+
+      const orientation =
+        this.orientation === DEFAULT_ORIENTATION[this._name] ? -1 : 1;
+
+      let y = (5 + this.strokeWidth) * orientation;
+
+      axisTitleText.setAttribute('x', width - _margins.right)
+      axisTitleText.setAttribute('y', y)
+      axisTitleText.setAttribute('dy', `${0.9 * ~orientation}em`)
+      // axisTitleText.setAttribute('dx', this.tickPosition === 'outside' ? `${5 * orientation}px` : `${-2 * orientation}px`)
+
+
+
+      axisTitleText.setAttribute(
+        'text-anchor', 'end'
+      );
+
+      // axisTitleText.setAttribute(
+      //   'text-anchor',
+      //   this.tickPosition === 'outside'
+      //     ? ~orientation
+      //       ? 'end'
+      //       : 'start'
+      //     : ~orientation
+      //     ? 'start'
+      //     : 'end'
+      // );
+
+      this.g.appendChild(axisTitleText);
     }
 
     const isLog = scales.x[name].isLog();

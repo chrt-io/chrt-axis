@@ -18,6 +18,7 @@ import {
   hideZero,
   label,
   interval,
+  title,
 } from './lib';
 import { chrtGeneric } from 'chrt-core';
 
@@ -48,6 +49,8 @@ function chrtAxis(name) {
   this._ticks = [];
   this._fixedTicks = null;
   this._interval = null;
+
+  this._classNames = ['chrt-axis'];
 
   this.draw = () => {
     if (!this.parentNode.scales[this._coordinates][name]) {
@@ -82,6 +85,7 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   hideZero,
   label,
   interval,
+  title,
 });
 
 export default chrtAxis;
