@@ -153,7 +153,7 @@ function yAxis(ticksNumber, customName = 'y') {
 
       axisTitleText.setAttribute('x', x)
       axisTitleText.setAttribute('y', _margins.top)
-      axisTitleText.setAttribute('dy', this.tickPosition === 'outside' ? "0.9em" : "-0.9em")
+      axisTitleText.setAttribute('dy', this.tickPosition === 'outside' ? '0.9em' : '-0.9em')
       axisTitleText.setAttribute('dx', this.tickPosition === 'outside' ? `${5 * orientation}px` : `${-2 * orientation}px`)
 
 
