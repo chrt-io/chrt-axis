@@ -6,14 +6,22 @@ import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
 
 function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
   chrtAxis.call(this, customName);
-  const name = this.name;
+  let name = this.name;
   this._name = 'x';
   this._coordinates = 'x';
   this.orientation = DEFAULT_ORIENTATION[this._name];
 
+  const coords = {
+    x: 'x',
+    y: 'y',
+  }
+
   this._classNames = [...this._classNames,'chrt-x-axis'];
 
   const xAxisTick = (tickGroup, visible) => {
+    this._name = coords.x;
+    name = this.parentNode.scales[coords.x][coords.x].getName();
+
     tickGroup.style.display = visible ? 'block' : 'none';
 
     const tickLine = tickGroup.querySelector('line');
@@ -34,7 +42,10 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
   };
 
   this.draw = () => {
-    if (!this.parentNode.scales.x[name]) {
+    this._name = coords.x;
+    name = this.parentNode.scales[coords.x][coords.x].getName();
+
+    if (!this.parentNode.scales[coords.x][name]) {
       return this.parentNode;
     }
 
@@ -44,13 +55,13 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       this._label.tickIndex = -1;
     }
 
-    const ticks = scales.x[name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
+    const ticks = scales[coords.x][name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }
     this._ticks = ticks
       .map((tick, i , arr) => {
-        tick.position = scales.x[name](tick.value);
+        tick.position = scales[coords.x][name](tick.value);
         let visible = tick.position >= _margins.left && tick.position <= width - _margins.right;
         visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
         visible = visible && ((!isLog) || (isLog && !tick.isMinor));
@@ -102,9 +113,10 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
 
     axisLine.setAttribute('x1', _margins.left);
     axisLine.setAttribute('x2', width - _margins.right);
-    const scaleY = scales.y['y'] || Object.values(scales.y)[0];
-    const axisLineY = scaleY.isLog() ? scaleY.range[1] : scaleY(this._zero) - (height - _margins.bottom);
-
+    // const scaleY = scales[coords.y][coords.y] || Object.values(scales[coords.y])[0];
+    const axisLineY = 0; // scaleY.isLog() ? scaleY.range[1] : scaleY(this._zero) - (height - _margins.bottom);
+    // console.log(this._zero, '->', scaleY(this._zero),'- (',height,'-',_margins.bottom,')')
+    // console.log('axisLineY', axisLineY)
     axisLine.setAttribute('y1', !isNaN(axisLineY) ? axisLineY : 0);
     axisLine.setAttribute('y2', !isNaN(axisLineY) ? axisLineY : 0);
 
@@ -152,7 +164,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       this.g.appendChild(axisTitleText);
     }
 
-    const isLog = scales.x[name].isLog();
+    const isLog = scales[coords.x][name].isLog();
     this.g.querySelectorAll('g').forEach(d => {
       const tickName = d.getAttribute('data-id');
 

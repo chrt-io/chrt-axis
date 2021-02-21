@@ -7,13 +7,23 @@ import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
 function yAxis(ticksNumber, customName = 'y') {
   ticksNumber = isNull(ticksNumber) ? TICKS_DEFAULT : ticksNumber;
   chrtAxis.call(this, customName, 'y');
-  const name = this.name;
+  let name = this.name;
   this._name = 'y';
   this._coordinates  = 'y';
   this.orientation = DEFAULT_ORIENTATION[this._name];
   this._classNames = [...this._classNames,'chrt-y-axis'];
 
+  const coords = {
+    x: 'x',
+    y: 'y',
+  }
+
+
+
   const yAxisTick = (tickGroup, visible) => {
+    this._name = coords.y;
+    name = this.parentNode.scales[coords.y][coords.y].getName();
+
     tickGroup.style.display = visible ? 'block' : 'none';
 
     const orientation =
@@ -58,14 +68,17 @@ function yAxis(ticksNumber, customName = 'y') {
   };
 
   this.draw = () => {
-    if (!this.parentNode.scales.y[name]) {
+    this._name = coords.y;
+    name = this.parentNode.scales[coords.y][coords.y].getName();
+
+    if (!this.parentNode.scales[coords.y][name]) {
       return this.parentNode;
     }
     const { _margins, scales, width, height } = this.parentNode;
 
     this.g.setAttribute('id', `${name}Axis${this.id()}`);
     this._classNames.forEach(d => this.g.classList.add(d));
-    
+
     const axisX =
       this.orientation === DEFAULT_ORIENTATION[this._name] ? _margins.left : width - _margins.right;
     this.g.setAttribute('transform', `translate(${axisX},0)`);
@@ -73,13 +86,13 @@ function yAxis(ticksNumber, customName = 'y') {
       this._label.tickIndex = -1;
     }
 
-    const ticks = scales.y[name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
+    const ticks = scales[coords.y][name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }
     this._ticks = ticks
       .map((tick, i , arr) => {
-        tick.position = scales.y[name](tick.value);
+        tick.position = scales[coords.y][name](tick.value);
         let visible =
           tick.position >= _margins.top && tick.position <= (height - _margins.bottom);
         visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
@@ -183,7 +196,7 @@ function yAxis(ticksNumber, customName = 'y') {
       this.g.appendChild(axisTitleText);
     }
 
-    const isLog = scales.y[name].isLog();
+    const isLog = scales[coords.y][name].isLog();
     this.g.querySelectorAll('g').forEach(d => {
       const tickName = d.getAttribute('data-id');
 
@@ -194,6 +207,7 @@ function yAxis(ticksNumber, customName = 'y') {
       }
     })
     generateTicks.call(this, this._ticks, name, (tickGroup, tick) => {
+      // console.log('generateTick', name, tick)
       tickGroup.setAttribute('transform', `translate(0, ${tick.position})`);
       yAxisTick(tickGroup, tick.visible);
     });
