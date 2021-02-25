@@ -1,5 +1,91 @@
 # chrt-axis
-Axis component for chrt
+Component for the creation of Axes in chrt. The axes define the area where the values are displayed and they help the reader to make sense of the position of the elements in the chart. Axes are based on scales (quantitative and categorical).
+
+The component provides two types of axes: the X Axis (`xAxis`) which runs horizontally and the Y Axis (`yAxis`), which runs vertically.
+
+A chrtAxis is formed by a set of visual elements:
+- One axis line
+- Ticks
+- Labels
+- Axis range
+
+One chart can have multiple Axes, and they can be oriented (left/right and top/bottom).
+
+## Installing
+You can install chrt as a standalone module `npm install chrt-axis` or as part of the `chrt` package.
+Otherwise you can download the code or use global content delivery network like UNPKG.
+
+## Usage
+
+### Script Tag
+```
+<script src="https://unpkg.com/chrt@latest/dist/chrt.min.js"></script>
+<script>
+    var chart = new chrt.Chrt();
+</script>
+```
+
+### ES6 / Bundlers (Webpack, Rollup, etc.)
+```
+import Chrt from "chrt-core";
+import { xAxis, yAxis } from "chrt-axis";
+
+Chrt()
+    .add(
+        xAxis()
+    )
+    .add(
+        yAxis()
+    )
+```
+
+## API Reference
+- xAxis
+- yAxis
+- chrtAxisRange
+
+### xAxis
+X Axis (`xAxis`) runs horizontally and it can be oriented at the bottom or top of the chart.
+
+#### `xAxis`
+```
+Chrt()
+    .add(
+        xAxis()
+    )
+```
+
+#### `xAxis.width()`
+
+#### `xAxis.color()`
+
+#### `xAxis.setTickLength()`
+
+#### `xAxis.setTickPosition()`
+
+#### `xAxis.showAxis()`
+
+#### `xAxis.hideAxis()`
+
+#### `xAxis.ticks()`
+
+#### `xAxis.filter()`
+
+#### `xAxis.showTicks()`
+
+#### `xAxis.hideTicks()`
+
+#### `xAxis.firstTick()`
+#### `xAxis.lastTick()`
+#### `xAxis.firstAndLastTicks()`
+#### `xAxis.orient()`
+#### `xAxis.format()`
+#### `xAxis.minor()`
+#### `xAxis.zero()`
+#### `xAxis.hideZero()`
+#### `xAxis.label()`
+#### `xAxis.interval()`
+#### `xAxis.title()`
 
 ## How to build
 
