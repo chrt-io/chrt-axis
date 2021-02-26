@@ -55,7 +55,15 @@ Chrt()
     )
 ```
 
-#### `xAxis.width()`
+#### `xAxis.width(widthValue)`
+If width is specified, it sets the thickness of the Axis line accordingly. If `widthValue` is `null`, this function will return the thickness of the line of the Axis. If `widthValue` is a `Number` or a `function`, `width` will set the thickness of the line of the Axis. For example:
+```
+Chrt()
+    .add(
+        xAxis()
+            .width(2)
+    )
+```
 
 #### `xAxis.color()`
 
