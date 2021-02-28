@@ -113,8 +113,12 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
 
     axisLine.setAttribute('x1', _margins.left);
     axisLine.setAttribute('x2', width - _margins.right);
-    // const scaleY = scales[coords.y][coords.y] || Object.values(scales[coords.y])[0];
-    const axisLineY = 0; // scaleY.isLog() ? scaleY.range[1] : scaleY(this._zero) - (height - _margins.bottom);
+    const scaleY = scales[coords.y][coords.y] || Object.values(scales[coords.y])[0];
+    let axisLineY = scaleY.isLog() ? scaleY.range[1] : scaleY(this._zero) - (height - _margins.bottom);
+    // console.log(scaleY.transformation,'+++++',scaleY.domain, this._zero)
+    if(scaleY.transformation==='ordinal' && !~scaleY.domain.indexOf(this._zero)) {
+      axisLineY = 0;
+    }
     // console.log(this._zero, '->', scaleY(this._zero),'- (',height,'-',_margins.bottom,')')
     // console.log('axisLineY', axisLineY)
     axisLine.setAttribute('y1', !isNaN(axisLineY) ? axisLineY : 0);
