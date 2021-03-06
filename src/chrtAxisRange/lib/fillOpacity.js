@@ -1,5 +1,5 @@
-export default function strokeWidth(value) {
-  return this.attr('strokeWidth', value)
+export default function fillOpacity(value) {
+  return this.attr('fillOpacity', value)
   // if(!value) {
   //   return this._strokeWidth;
   // }

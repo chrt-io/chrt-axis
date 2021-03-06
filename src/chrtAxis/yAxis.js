@@ -76,7 +76,7 @@ function yAxis(ticksNumber, customName = 'y') {
     }
     const { _margins, scales, width, height } = this.parentNode;
 
-    this.g.setAttribute('id', `${name}Axis${this.id()}`);
+    this.g.setAttribute('id', `${name}Axis-${this.id()}`);
     this._classNames.forEach(d => this.g.classList.add(d));
 
     const axisX =
