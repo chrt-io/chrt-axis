@@ -43,7 +43,7 @@ function chrtAxis(name) {
   this.tickPosition = TICK_POSITION;
   this.labelFormat = d => d;
   this.showMinorTicks = false;
-  this._zero = 0;
+  this._zero = null;
   this.showZero = true;
   this._label = null;
   this._ticks = [];
