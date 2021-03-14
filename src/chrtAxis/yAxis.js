@@ -162,7 +162,7 @@ function yAxis(ticksNumber, customName = 'y') {
       const orientation =
         this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
-      let x = (this.tickPosition === 'outside' ? -this.tickLength : 0) * orientation;
+      let x = (this.tickPosition === 'outside' ? this.tickLength : 0) * orientation;
 
       axisTitleText.setAttribute('x', x)
       axisTitleText.setAttribute('y', _margins.top)
@@ -171,16 +171,8 @@ function yAxis(ticksNumber, customName = 'y') {
 
 
 
-      axisTitleText.setAttribute(
-        'text-anchor',
-          this.tickPosition === 'inside'
-            ? orientation
-              ? 'end'
-              : 'start'
-            : orientation
-            ? 'start'
-            : 'end'
-      );
+      axisTitleText.setAttribute('text-anchor', ~orientation ? 'start' : 'end');
+      // axisTitleText.setAttribute('text-anchor','start');
 
       // axisTitleText.setAttribute(
       //   'text-anchor',
