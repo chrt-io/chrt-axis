@@ -22,7 +22,7 @@ function yAxis(ticksNumber, customName = 'y') {
 
   const yAxisTick = (tickGroup, visible) => {
     this._name = coords.y;
-    name = this.parentNode.scales[coords.y][coords.y].getName();
+    name = this.parentNode.scales[coords.y][this.name].getName();
 
     tickGroup.style.display = visible ? 'block' : 'none';
 
@@ -69,7 +69,7 @@ function yAxis(ticksNumber, customName = 'y') {
 
   this.draw = () => {
     this._name = coords.y;
-    name = this.parentNode.scales[coords.y][coords.y].getName();
+    name = this.parentNode.scales[coords.y][this.name].getName();
 
     if (!this.parentNode.scales[coords.y][name]) {
       return this.parentNode;

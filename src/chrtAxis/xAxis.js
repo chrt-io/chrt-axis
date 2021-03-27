@@ -20,7 +20,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
 
   const xAxisTick = (tickGroup, visible) => {
     this._name = coords.x;
-    name = this.parentNode.scales[coords.x][coords.x].getName();
+    name = this.parentNode.scales[coords.x][this.name].getName();
 
     tickGroup.style.display = visible ? 'block' : 'none';
 
@@ -43,7 +43,10 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
 
   this.draw = () => {
     this._name = coords.x;
-    name = this.parentNode.scales[coords.x][coords.x].getName();
+    // TODO: needs improvement, name and this.name will be the same
+    name = this.parentNode.scales[coords.x][this.name].getName();
+
+    // console.log('this.name vs name', this.name, name)
 
     if (!this.parentNode.scales[coords.x][name]) {
       return this.parentNode;
