@@ -5,6 +5,10 @@ import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
 
 function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
+  if(typeof arguments[0] === 'string') {
+    customName = arguments[0];
+    ticksNumber = TICKS_DEFAULT;
+  }
   chrtAxis.call(this, customName);
   let name = this.name;
   this._name = 'x';

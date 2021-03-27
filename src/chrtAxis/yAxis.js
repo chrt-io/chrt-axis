@@ -4,8 +4,13 @@ import generateTicks from './lib/generateTicks';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
 
-function yAxis(ticksNumber, customName = 'y') {
-  ticksNumber = isNull(ticksNumber) ? TICKS_DEFAULT : ticksNumber;
+function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
+  // ticksNumber = isNull(ticksNumber) ? TICKS_DEFAULT : ticksNumber;
+  // console.log('Y AXIS', arguments)
+  if(typeof arguments[0] === 'string') {
+    customName = arguments[0];
+    ticksNumber = TICKS_DEFAULT;
+  }
   chrtAxis.call(this, customName, 'y');
   let name = this.name;
   this._name = 'y';
@@ -69,6 +74,7 @@ function yAxis(ticksNumber, customName = 'y') {
 
   this.draw = () => {
     this._name = coords.y;
+    // console.log('Y AXIS this.name', this.name)
     name = this.parentNode.scales[coords.y][this.name].getName();
 
     if (!this.parentNode.scales[coords.y][name]) {
