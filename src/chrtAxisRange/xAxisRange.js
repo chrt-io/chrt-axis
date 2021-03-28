@@ -1,6 +1,7 @@
 import chrtAxisRange from './chrtAxisRange';
 import { isNull } from '~/helpers';
 import { createSVG as create } from '~/layout';
+import { DEFAULT_ORIENTATION } from '~/constants';
 
 function xAxisRange() {
   chrtAxisRange.call(this);
@@ -29,6 +30,8 @@ function xAxisRange() {
     const strokeOpacity = this.attr('strokeOpacity')();
     const strokeWidth = this.attr('strokeWidth')();
 
+    const orientation = this.parentNode.orientation === DEFAULT_ORIENTATION[this.parentNode._name] ? 1 : -1;
+
     const { scales, height, _margins } = this.parentNode.parentNode;
 
     let from = null;
@@ -48,6 +51,8 @@ function xAxisRange() {
     if (isNull(from) && isNull(to)) {
       return;
     }
+
+    this.g.setAttribute('transform',`translate(0, ${orientation > 1 ? 0 : (height - (_margins.top + _margins.bottom) + this.parentNode.strokeWidth)})`)
 
     // the range should be at least 1px thick
     from = isNull(from) ? to : from;

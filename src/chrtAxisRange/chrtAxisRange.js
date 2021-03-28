@@ -18,8 +18,8 @@ const DEFAULT_STROKE_OPACITY = 1;
 const DEFAULT_STROKE_WIDTH = 1;
 const DEFAULT_FILL_OPACITY = 1;
 
-function chrtAxisRange(food) {
-  console.log('chrtAxisRange', this, food)
+function chrtAxisRange() {
+  // console.log('chrtAxisRange', this)
   chrtGeneric.call(this);
   // console.log('HI WE ARE MARKERS', this);
   this.type = 'axis-range';

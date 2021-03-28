@@ -40,7 +40,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       tickLine.setAttribute('x1', 0);
       tickLine.setAttribute(
         'x2',
-        (this.tickPosition === 'outside' ? -this.tickLength : 0) * orientation
+        (this.tickPosition === 'outside' ? -this.tickLength : this.tickLength) * orientation
       );
     }
 
@@ -49,7 +49,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     const label = tickGroup.querySelector('text');
     label.setAttribute(
       'text-anchor',
-      this.tickPosition === 'outside'
+      this.labelPosition === 'outside'
         ? ~orientation
           ? 'end'
           : 'start'
@@ -59,15 +59,15 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     );
     label.setAttribute(
       'x',
-      (this.tickPosition === 'outside' ? -this.tickLength : 0) * orientation
+      (this.labelPosition === 'outside' ? -this.tickLength : 0) * orientation
     );
     label.setAttribute(
       'dx',
-      `${(this.tickPosition === 'outside' ? -5 : 5) * orientation}px`
+      `${(this.labelPosition === 'outside' ? -5 : 5) * orientation}px`
     );
     label.setAttribute(
       'dy',
-      this.tickPosition === 'outside' ? '0.25em' : '-0.3em'
+      this.labelPosition === 'outside' ? '0.25em' : '-0.3em'
     );
     label.setAttribute('fill', this.stroke);
   };
@@ -143,7 +143,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     axisLine.setAttribute('stroke', this.stroke);
     axisLine.setAttribute(
       'stroke-width',
-      this.tickPosition === 'outside' ? this.strokeWidth : 0
+      this.labelPosition === 'outside' ? this.strokeWidth : 0
     );
 
     axisLine.setAttribute('x1', 0);
@@ -168,12 +168,12 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       const orientation =
         this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
-      let x = (this.tickPosition === 'outside' ? this.tickLength : 0) * orientation;
+      let x = (this.labelPosition === 'outside' ? this.tickLength : 0) * orientation;
 
       axisTitleText.setAttribute('x', x)
       axisTitleText.setAttribute('y', _margins.top)
-      axisTitleText.setAttribute('dy', this.tickPosition === 'outside' ? '0.9em' : '-0.9em')
-      axisTitleText.setAttribute('dx', this.tickPosition === 'outside' ? `${5 * orientation}px` : `${-2 * orientation}px`)
+      axisTitleText.setAttribute('dy', this.labelPosition === 'outside' ? '0.9em' : '-0.9em')
+      axisTitleText.setAttribute('dx', this.labelPosition === 'outside' ? `${5 * orientation}px` : `${-2 * orientation}px`)
 
 
 

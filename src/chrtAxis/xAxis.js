@@ -36,7 +36,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       tickLine.setAttribute('x1', 0);
       tickLine.setAttribute('x2', 0);
       tickLine.setAttribute('y1', 0);
-      tickLine.setAttribute('y2', this.tickLength * orientation);
+      tickLine.setAttribute('y2',   (this.tickPosition === 'outside' ? this.tickLength : -this.tickLength) * orientation);
     }
     const label = tickGroup.querySelector('text');
     label.setAttribute('text-anchor', 'middle');

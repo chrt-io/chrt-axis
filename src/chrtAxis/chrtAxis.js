@@ -27,6 +27,7 @@ const DEAULT_LINE_COLOR = '#000';
 const DEAULT_TICK_TEXT_COLOR = '#000';
 const TICK_LENGTH = 5;
 const TICK_POSITION = 'outside';
+const LABEL_POSITION = 'outside';
 
 function chrtAxis(name) {
   chrtGeneric.call(this);
@@ -41,6 +42,7 @@ function chrtAxis(name) {
   this.ticksFilter = null;
   this.tickLength = TICK_LENGTH;
   this.tickPosition = TICK_POSITION;
+  this.labelPosition = LABEL_POSITION;
   this.labelFormat = d => d;
   this.showMinorTicks = false;
   this._zero = null;
