@@ -159,7 +159,7 @@ function chrtAxisTitle(text) {
       this.g.appendChild(this.text);
     }
 
-    if(this.parentNode.name === 'x') {
+    if(this.parentNode._name === 'x') {
       xAxisDraw();
     } else {
       yAxisDraw();
