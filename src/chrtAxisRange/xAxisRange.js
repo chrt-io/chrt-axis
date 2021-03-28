@@ -52,7 +52,7 @@ function xAxisRange() {
       return;
     }
 
-    this.g.setAttribute('transform',`translate(0, ${orientation > 1 ? 0 : (height - (_margins.top + _margins.bottom) + this.parentNode.strokeWidth)})`)
+    this.g.setAttribute('transform',`translate(0, ${orientation > 0 ? 0 : (height - (_margins.top + _margins.bottom) + this.parentNode.strokeWidth)})`)
 
     // the range should be at least 1px thick
     from = isNull(from) ? to : from;

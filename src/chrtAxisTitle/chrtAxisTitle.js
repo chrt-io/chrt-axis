@@ -7,7 +7,7 @@ const DEFAULT_ALIGNMENT = 'right';
 const DEFAULT_VERTICAL_ALIGNMENT = 'top';
 
 function chrtAxisTitle(text) {
-  console.log('chrtAxisTitle', this, 'text ->', text);
+  // console.log('chrtAxisTitle', this, 'text ->', text);
   chrtGeneric.call(this);
 
   this.type = 'axis-title';

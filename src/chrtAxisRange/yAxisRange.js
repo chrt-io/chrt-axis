@@ -52,7 +52,7 @@ function yAxisRange() {
       return;
     }
 
-    this.g.setAttribute('transform',`translate(${orientation > 1 ? 0 : -(width - (_margins.right + _margins.left))},0)`)
+    this.g.setAttribute('transform',`translate(${orientation > 0 ? 0 : -(width - (_margins.right + _margins.left))},0)`)
 
     // the range should be at least 1px thick
     from = isNull(from) ? to : from;
