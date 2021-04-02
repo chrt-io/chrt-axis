@@ -8,6 +8,7 @@ A chrtAxis is formed by a set of visual elements:
 - Ticks
 - Labels
 - Axis range
+- Axis title
 
 One chart can have multiple Axes, and they can be oriented (left/right and top/bottom).
 
@@ -55,7 +56,7 @@ Chrt()
     )
 ```
 
-#### `xAxis.width(widthValue)`
+#### `xAxis.width([widthValue])`
 If `widthValue` is specified, it sets the thickness of the Axis line accordingly. If `widthValue` is `null`, this function will return the thickness of the line of the Axis. If `widthValue` is a `Number` or a `function`, `width` will set the thickness of the line of the Axis. For example:
 ```
 Chrt()
@@ -65,7 +66,7 @@ Chrt()
     )
 ```
 
-#### `xAxis.color(colorValue)`
+#### `xAxis.color([colorValue])`
 If `colorValue` is specified, it sets the color of the Axis line accordingly. If `colorValue` is `null`, this function will return the color of the line of the Axis. If `colorValue` is a `String` or a `function`, `color` will set the color of the line of the Axis. For example:
 ```
 Chrt()
@@ -75,7 +76,7 @@ Chrt()
     )
 ```
 
-#### `xAxis.setTickLength(tickLength)`
+#### `xAxis.setTickLength([tickLength])`
 If `tickLength` is specified, it sets the length of the ticks of the Axis accordingly. If `tickLength` is `null`, this function will return the length of the ticks of the Axis. If `tickLength` is a `Number` or a `function`, `setTickLength` will set the length of the ticks of the Axis. For example:
 ```
 Chrt()
@@ -85,21 +86,46 @@ Chrt()
     )
 ```
 
-#### `xAxis.setTickPosition(tickPosition)`
-If `tickPosition` is specified, it sets the position of the ticks of the Axis accordingly. If `tickPosition` is `null`, this function will return the current position of the ticks of the Axis. If `tickPosition` is a `String` or a `function`, `setTickPosition` will set the length of the ticks of the Axis. The accepted values of `tickPosition` is `inside` and `outside` (default position). For example:
+#### `xAxis.setTickPosition([tickPosition])`
+If `tickPosition` is specified, it sets the position of the ticks of the Axis accordingly. If `tickPosition` is `null`, this function will return the current position of the ticks of the Axis. If `tickPosition` is a `String` or a `function`, `setTickPosition` will set the length of the ticks of the Axis. The accepted values of `tickPosition` are `inside` and `outside` (default position). For example:
 ```
 Chrt()
     .add(
         xAxis()
             .setTickPosition('inside')
+            .setTickPosition('outside')
     )
 ```
 
-#### `xAxis.showAxis()`
+#### `xAxis.showAxis([show])`
+If `show` is specified, it sets visibility the Axis accordingly. If `show` is `null`, this function will return the current visibility of the Axis. If `show` is a `Boolean` or a `function`, `showAxis` will define whether the Axis is visible or not. For example:
+```
+Chrt()
+    .add(
+        xAxis()
+            .showAxis(false)
+    )
+```
 
 #### `xAxis.hideAxis()`
+Shortcut for `showAxis(false)`, when called on the Axis it will hide the axis. For example:
+```
+Chrt()
+    .add(
+        xAxis()
+            .hideAxis()
+    )
+```
 
-#### `xAxis.ticks()`
+#### `xAxis.ticks([count])`
+If `count` is specified, it suggests the count for the number of ticks the Axis accordingly. If `count` is `null`, this function will return the list of the ticks the Axis. If `count` is a `Number` or a `function`, `ticks` will define a suggested count for the number of ticks in the Axis that will be calculated by the axis scale.
+```
+Chrt()
+    .add(
+        xAxis()
+            .ticks(10)
+    )
+```
 
 #### `xAxis.filter()`
 
