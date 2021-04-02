@@ -48,11 +48,28 @@ Chrt()
 ### xAxis
 X Axis (`xAxis`) runs horizontally and it can be oriented at the bottom or top of the chart.
 
-#### `xAxis`
+#### `xAxis([tickCount[, scaleName]])`
+When `xAxis` is added without arguments, `chrt` builds a default axis with a computed number of ticks based on the x scale. For example:
 ```
 Chrt()
     .add(
         xAxis()
+    )
+```
+
+When `xAxis` is added with `count`, `chrt` builds a default axis with a suggested number of ticks based on the x scale. For example:
+```
+Chrt()
+    .add(
+        xAxis(5)
+    )
+```
+
+When `xAxis` is added with a `scaleName`, `chrt` builds an axis by computing the ticks based on the custom scale called `scaleName`. For example:
+```
+Chrt()
+    .add(
+        xAxis(10, 'customScaleName')
     )
 ```
 
