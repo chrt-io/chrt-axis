@@ -56,7 +56,7 @@ Chrt()
 ```
 
 #### `xAxis.width(widthValue)`
-If width is specified, it sets the thickness of the Axis line accordingly. If `widthValue` is `null`, this function will return the thickness of the line of the Axis. If `widthValue` is a `Number` or a `function`, `width` will set the thickness of the line of the Axis. For example:
+If `widthValue` is specified, it sets the thickness of the Axis line accordingly. If `widthValue` is `null`, this function will return the thickness of the line of the Axis. If `widthValue` is a `Number` or a `function`, `width` will set the thickness of the line of the Axis. For example:
 ```
 Chrt()
     .add(
@@ -65,11 +65,35 @@ Chrt()
     )
 ```
 
-#### `xAxis.color()`
+#### `xAxis.color(colorValue)`
+If `colorValue` is specified, it sets the color of the Axis line accordingly. If `colorValue` is `null`, this function will return the color of the line of the Axis. If `colorValue` is a `String` or a `function`, `color` will set the color of the line of the Axis. For example:
+```
+Chrt()
+    .add(
+        xAxis()
+            .color('#f00')
+    )
+```
 
-#### `xAxis.setTickLength()`
+#### `xAxis.setTickLength(tickLength)`
+If `tickLength` is specified, it sets the length of the ticks of the Axis accordingly. If `tickLength` is `null`, this function will return the length of the ticks of the Axis. If `tickLength` is a `Number` or a `function`, `setTickLength` will set the length of the ticks of the Axis. For example:
+```
+Chrt()
+    .add(
+        xAxis()
+            .setTickLength(5)
+    )
+```
 
-#### `xAxis.setTickPosition()`
+#### `xAxis.setTickPosition(tickPosition)`
+If `tickPosition` is specified, it sets the position of the ticks of the Axis accordingly. If `tickPosition` is `null`, this function will return the current position of the ticks of the Axis. If `tickPosition` is a `String` or a `function`, `setTickPosition` will set the length of the ticks of the Axis. The accepted values of `tickPosition` is `inside` and `outside` (default position). For example:
+```
+Chrt()
+    .add(
+        xAxis()
+            .setTickPosition('inside')
+    )
+```
 
 #### `xAxis.showAxis()`
 
