@@ -89,7 +89,9 @@ function xAxisRange() {
     }
 
     const lines = [...new Set([from, to])];
-    this.lines = [];
+    if(isNull(this.lines)) {
+      this.lines = [];
+    }
 
     lines.forEach((position, index) => {
       if (!this.lines[index]) {
@@ -111,6 +113,7 @@ function xAxisRange() {
         line.setAttribute('stroke-dasharray', this._strokeStyle);
       }
     });
+    return this.parentNode;
   };
 }
 
