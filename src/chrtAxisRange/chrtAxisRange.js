@@ -112,7 +112,10 @@ function chrtAxisRange() {
     }
 
     const lines = [...new Set([from, to])];
-    this.lines = [];
+
+    if(isNull(this.lines)) {
+      this.lines = [];
+    }
 
     lines.forEach((position, index) => {
       if (!this.lines[index]) {
