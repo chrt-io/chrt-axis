@@ -1,6 +1,6 @@
 {
   "name": "chrt-axis",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "Axis component for Chrt",
   "main": "dist/chrt-axis.js",
   "module": "dist/chrt-axis.esm.js",
