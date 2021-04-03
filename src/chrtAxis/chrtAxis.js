@@ -3,6 +3,7 @@ import {
   lineWidth,
   setTickLength,
   setTickPosition,
+  setLabelPosition,
   showAxis,
   hideAxis,
   ticks,
@@ -11,6 +12,12 @@ import {
   firstTick,
   lastTick,
   firstAndLastTicks,
+  labels,
+  showLabels,
+  hideLabels,
+  firstLabel,
+  lastLabel,
+  firstAndLastLabels,
   orient,
   format,
   minor,
@@ -40,6 +47,7 @@ function chrtAxis(name) {
   this.tickTextColor = DEAULT_TICK_TEXT_COLOR;
   this.showAxisLine = true;
   this.ticksFilter = null;
+  this.labelsFilter = null;
   this.tickLength = TICK_LENGTH;
   this.tickPosition = TICK_POSITION;
   this.labelPosition = LABEL_POSITION;
@@ -71,15 +79,24 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   color: lineColor,
   setTickLength,
   setTickPosition,
+  setLabelPosition,
   showAxis,
   hideAxis,
   ticks,
+  filterTicks: showTicks,
   filter: showTicks,
   showTicks,
   hideTicks,
   firstTick,
   lastTick,
   firstAndLastTicks,
+  labels,
+  filterLabels: showTicks,
+  showLabels,
+  hideLabels,
+  firstLabel,
+  lastLabel,
+  firstAndLastLabels,
   orient,
   format,
   minor,

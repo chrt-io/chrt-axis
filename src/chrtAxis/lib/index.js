@@ -13,3 +13,4 @@ export { default as zero, hideZero } from './zero';
 export { default as label } from './label';
 export { default as interval } from './interval';
 export { default as title } from './title';
+export { default as labels, showLabels, hideLabels, firstLabel, lastLabel, firstAndLastLabels } from './labels';

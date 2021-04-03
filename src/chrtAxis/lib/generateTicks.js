@@ -21,13 +21,6 @@ export default function generateTicks(ticks,name,callback) {
         tickGroup.appendChild(tickLine);
       }
 
-      const label = create('text')
-      label.textContent = this.labelFormat(tick.value, i, arr);
-      label.setAttribute('fill', this.tickTextColor)
-      if(tick.label) {
-        label.textContent = `${this.labelFormat(tick.value, i, arr)}${tick.label.text}`;
-      }
-      tickGroup.appendChild(label);
     }
     if(callback) {
       callback.call(null, tickGroup, tick, i, arr);

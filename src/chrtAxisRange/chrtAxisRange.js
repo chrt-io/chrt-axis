@@ -17,7 +17,7 @@ const DEFAULT_STROKE_WIDTH = 1;
 const DEFAULT_FILL_OPACITY = 1;
 
 function chrtAxisRange() {
-  console.log('chrtAxisRange', this)
+  // console.log('chrtAxisRange', this)
   chrtGeneric.call(this);
   this.type = 'axis-range';
   this.g = null;

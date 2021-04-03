@@ -1,6 +1,7 @@
 import { isNull } from '~/helpers';
 import { createSVG as create } from '~/layout';
 import generateTicks from './lib/generateTicks';
+import generateLabels from './lib/generateLabels';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
 
@@ -47,29 +48,32 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
 
     const label = tickGroup.querySelector('text');
-    label.setAttribute(
-      'text-anchor',
-      this.labelPosition === 'outside'
-        ? ~orientation
-          ? 'end'
-          : 'start'
-        : ~orientation
-        ? 'start'
-        : 'end'
-    );
-    label.setAttribute(
-      'x',
-      (this.labelPosition === 'outside' ? -this.tickLength : 0) * orientation
-    );
-    label.setAttribute(
-      'dx',
-      `${(this.labelPosition === 'outside' ? -5 : 5) * orientation}px`
-    );
-    label.setAttribute(
-      'dy',
-      this.labelPosition === 'outside' ? '0.25em' : '-0.3em'
-    );
-    label.setAttribute('fill', this.stroke);
+    if(label) {
+      label.setAttribute(
+        'text-anchor',
+        this.labelPosition === 'outside'
+          ? ~orientation
+            ? 'end'
+            : 'start'
+          : ~orientation
+          ? 'start'
+          : 'end'
+      );
+      label.setAttribute(
+        'x',
+        (this.labelPosition === 'outside' ? -this.tickLength : 0) * orientation
+      );
+      label.setAttribute(
+        'dx',
+        `${(this.labelPosition === 'outside' ? -5 : 5) * orientation}px`
+      );
+      label.setAttribute(
+        'dy',
+        this.labelPosition === 'outside' ? '0.25em' : '-0.3em'
+      );
+      label.setAttribute('fill', this.stroke);
+    }
+
   };
 
   this.draw = () => {
@@ -104,21 +108,27 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
         visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
         visible = visible && ((!isLog) || (isLog && !tick.isMinor));
 
-        if(this.ticksFilter) {
-          visible = visible && this.ticksFilter(tick.value, i, arr);
-        }
         tick.visible = visible;
+        if(this.ticksFilter) {
+          tick.visible = tick.visible && this.ticksFilter(tick.value, i, arr);
+        }
+
+        tick.visibleLabel = visible;
+        if(this.labelsFilter) {
+          tick.visibleLabel = tick.visibleLabel && this.labelsFilter(tick.value, i, arr);
+        }
+
+        // console.log('---->','tick.visibleLabel', tick.visibleLabel, tick)
 
         tick.label = null;
-
-        if(tick.visible && this._label) {
+        if(tick.visibleLabel && this._label) {
           if(!isNull(this._label.value) && this._label.value === tick.value) {
             tick.label = this._label;
             this._label.tickIndex = tick.index;
           }
         }
 
-        if(tick.visible && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
+        if(tick.visibleLabel && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
           if(!isNull(this._label.position)) {
             tick.label = this._label;
             this._label.tickIndex = tick.index;
@@ -128,8 +138,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
         return tick;
       })
-      .filter(d => d.visible) // decrease the number of ticks rendered in the DOM
-      // .filter((tick, i, arr) => this.ticksFilter ? this.ticksFilter(tick.value, i, arr) : true);
+      .filter(d => d.visible || d.visibleLabel) // decrease the number of ticks rendered in the DOM
 
     // console.log('Y AXIS TICKS', ticks)
 
@@ -208,6 +217,11 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       // console.log('generateTick', name, tick)
       tickGroup.setAttribute('transform', `translate(0, ${tick.position})`);
       yAxisTick(tickGroup, tick.visible);
+    });
+    generateLabels.call(this, this._ticks, name, (tickGroup, tick) => {
+      // console.log('generateTick', name, tick)
+      tickGroup.setAttribute('transform', `translate(0, ${tick.position})`);
+      yAxisTick(tickGroup, tick.visibleLabel);
     });
 
     this.objects.forEach(obj => obj.draw())
