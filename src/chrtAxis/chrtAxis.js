@@ -27,7 +27,7 @@ import {
   interval,
   title,
 } from './lib';
-import { chrtGeneric } from 'chrt-core';
+import chrtGeneric from 'chrt-object';
 
 const DEFAULT_LINE_WIDTH = 1;
 const DEAULT_LINE_COLOR = '#000';

@@ -1,4 +1,4 @@
-import { chrtGeneric } from 'chrt-core';
+import chrtGeneric from 'chrt-object';
 import {
   color,
   stroke,

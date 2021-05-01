@@ -1,4 +1,4 @@
-import { chrtGeneric } from 'chrt-core';
+import chrtGeneric from 'chrt-object';
 import { color, align, valign, offset } from './lib';
 import { createSVG as create } from '~/layout';
 
