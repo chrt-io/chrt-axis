@@ -14,12 +14,12 @@ export default function generateTicks(ticks,name,callback) {
 
       this.g.appendChild(tickGroup);
 
-      if(this.showAxisLine) {
-        const tickLine = create('line');
-        tickLine.setAttribute('stroke', this.stroke)
-        tickLine.setAttribute('stroke-width', this.strokeWidth);
-        tickGroup.appendChild(tickLine);
-      }
+
+      const tickLine = create('line');
+      tickLine.setAttribute('stroke', this.stroke)
+      tickLine.setAttribute('stroke-width', this.strokeWidth);
+      tickGroup.appendChild(tickLine);
+
 
     }
     if(callback) {
