@@ -9,8 +9,11 @@ export { default as ticks, showTicks, hideTicks, firstTick, lastTick, firstAndLa
 export { default as orient } from './orientation';
 export { default as format } from './labelFormat';
 export { default as minor } from './minor';
-export { default as zero, hideZero } from './zero';
+export { default as zero } from './zero';
 export { default as label } from './label';
 export { default as interval } from './interval';
 export { default as title } from './title';
 export { default as labels, showLabels, hideLabels, firstLabel, lastLabel, firstAndLastLabels } from './labels';
+export { default as labelColor } from './labelsColor';
+export { default as ticksColor } from './ticksColor';
+export { default as ticksWidth } from './ticksWidth';

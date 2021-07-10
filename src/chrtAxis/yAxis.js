@@ -16,7 +16,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
   let name = this.name;
   this._name = 'y';
   this._coordinates  = 'y';
-  this.orientation = DEFAULT_ORIENTATION[this._name];
+  this.attr('orientation', DEFAULT_ORIENTATION[this._name]);
   this._classNames = [...this._classNames,'chrt-y-axis'];
 
   const coords = {
@@ -24,59 +24,63 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     y: 'y',
   }
 
-
-
   const yAxisTick = (tickGroup, visible) => {
     this._name = coords.y;
     name = this.parentNode.scales[coords.y][this.name].getName();
 
     tickGroup.style.display = visible ? 'block' : 'none';
 
-    const orientation =
-    this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
+    const orientation = this.attr('orientation')();
+    const orientationDirection =
+      orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
-
+    const tickLength = this.attr('ticksLength')();
     const tickLine = tickGroup.querySelector('line');
     if(tickLine) {
+
       tickLine.setAttribute('x1', 0);
       tickLine.setAttribute(
         'x2',
-        (this.tickPosition === 'outside' ? -this.tickLength : this.tickLength) * orientation
+        (this.attr('ticksPosition')() === 'outside' ? -tickLength : tickLength) * orientationDirection
       );
+      tickLine.setAttribute('stroke', this.ticksColor()());
     }
 
 
+    const labelPosition = this.attr('labelsPosition')();
 
     const label = tickGroup.querySelector('text');
     if(label) {
       label.setAttribute(
         'text-anchor',
-        this.labelPosition === 'outside'
-          ? ~orientation
+        labelPosition === 'outside'
+          ? ~orientationDirection
             ? 'end'
             : 'start'
-          : ~orientation
+          : ~orientationDirection
           ? 'start'
           : 'end'
       );
       label.setAttribute(
         'x',
-        (this.labelPosition === 'outside' ? -this.tickLength : 0) * orientation
+        (labelPosition === 'outside' ? -tickLength : 0) * orientationDirection
       );
       label.setAttribute(
         'dx',
-        `${(this.labelPosition === 'outside' ? -5 : 5) * orientation}px`
+        `${(labelPosition === 'outside' ? -5 : 5) * orientationDirection}px`
       );
       label.setAttribute(
         'dy',
-        this.labelPosition === 'outside' ? '0.25em' : '-0.3em'
+        labelPosition === 'outside' ? '0.25em' : '-0.3em'
       );
-      label.setAttribute('fill', this.stroke);
+      label.setAttribute('fill', this.labelColor()());
     }
 
   };
 
   this.draw = () => {
+    // console.log('DRAWING Y AXIS')
+
     this._name = coords.y;
     // console.log('Y AXIS this.name', this.name)
     name = this.parentNode.scales[coords.y][this.name].getName();
@@ -86,26 +90,30 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     }
     const { _margins, scales, width, height } = this.parentNode;
 
+    const orientation = this.attr('orientation')();
+
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);
     this._classNames.forEach(d => this.g.classList.add(d));
 
     const axisX =
-      this.orientation === DEFAULT_ORIENTATION[this._name] ? _margins.left : width - _margins.right;
+      orientation === DEFAULT_ORIENTATION[this._name] ? _margins.left : width - _margins.right;
     this.g.setAttribute('transform', `translate(${axisX},0)`);
-    if(this._label) {
-      this._label.tickIndex = -1;
-    }
-
-    const ticks = scales[coords.y][name].ticks(this._fixedTicks || ticksNumber * 2, this._interval);
+    // if(this._label) {
+    //   this._label.tickIndex = -1;
+    // }
+    const _interval = this.attr('interval')();
+    const ticks = scales[coords.y][name].ticks(this._fixedTicks || ticksNumber * 2, _interval);
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }
+    // console.log('TICKS', ticks, `scales[${coords.y}][${name}]`,scales[coords.y][name].domain, scales[coords.y][name].range)
     this._ticks = ticks
       .map((tick, i , arr) => {
         tick.position = scales[coords.y][name](tick.value);
         let visible =
           tick.position >= _margins.top && tick.position <= (height - _margins.bottom);
-        visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
+        // visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
+        visible = visible && (this.attr('showMinorTicks')() || !tick.isMinor);
         visible = visible && ((!isLog) || (isLog && !tick.isMinor));
 
         tick.visible = visible;
@@ -120,20 +128,20 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
         // console.log('---->','tick.visibleLabel', tick.visibleLabel, tick)
 
-        tick.label = null;
-        if(tick.visibleLabel && this._label) {
-          if(!isNull(this._label.value) && this._label.value === tick.value) {
-            tick.label = this._label;
-            this._label.tickIndex = tick.index;
-          }
-        }
-
-        if(tick.visibleLabel && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
-          if(!isNull(this._label.position)) {
-            tick.label = this._label;
-            this._label.tickIndex = tick.index;
-          }
-        }
+        // tick.label = null;
+        // if(tick.visibleLabel && this._label) {
+        //   if(!isNull(this._label.value) && this._label.value === tick.value) {
+        //     tick.label = this._label;
+        //     this._label.tickIndex = tick.index;
+        //   }
+        // }
+        //
+        // if(tick.visibleLabel && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
+        //   if(!isNull(this._label.position)) {
+        //     tick.label = this._label;
+        //     this._label.tickIndex = tick.index;
+        //   }
+        // }
 
 
         return tick;
@@ -142,26 +150,42 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
     // console.log('Y AXIS TICKS', ticks)
 
-    let axisLine = this.g.querySelector(`[data-id='tick-${name}-axis-line']`);
+    let axisLine = this.g.querySelector(`line[data-id='tick-${name}-axis-line']`);
     if (!axisLine) {
       axisLine = create('line');
       axisLine.setAttribute('data-id', `tick-${name}-axis-line`);
       this.g.appendChild(axisLine);
     }
-
-    axisLine.setAttribute('stroke', this.stroke);
+    const labelPosition = this.attr('labelsPosition')();
+    axisLine.setAttribute('stroke', this.stroke()());
     axisLine.setAttribute(
-      'stroke-width',
-      this.labelPosition === 'outside' ? this.strokeWidth : 0
+      'stroke-width', this.strokeWidth()()
     );
 
-    axisLine.setAttribute('x1', 0);
-    axisLine.setAttribute('x2', 0);
+    const scaleX = scales[coords.x][coords.x] || Object.values(scales[coords.x])[0];
+    const _zero = this.attr('zero')();
+    const zero = isNull(_zero) ? scaleX.domain[0] : _zero;
+    // let axisLineX = scaleX.isLog() ? scaleX.range[0] : scaleX(zero) - _margins.left;
+    let axisLineX = scaleX(zero) - _margins.left;
+    // console.log(this.parentNode._padding)
+    // console.log('scaleX', scaleX.transformation, scaleX.domain, 'zero', zero, _zero)
+    if(scaleX.transformation === 'ordinal' &&
+      (isNull(_zero) || !~scaleX.domain.indexOf(zero))) {
+      axisLineX = 0;
+    }
+    // console.log(_zero, '->', scaleY(_zero),'- (',height,'-',_margins.bottom,')')
+    // console.log('axisLineX', axisLineX)
+    axisLineX = axisLineX - this.parentNode._padding.left;
+    axisLine.setAttribute('x1', !isNaN(axisLineX) ? axisLineX : 0);
+    axisLine.setAttribute('x2', !isNaN(axisLineX) ? axisLineX : 0);
+
+    // axisLine.setAttribute('x1', 0);
+    // axisLine.setAttribute('x2', 0);
     axisLine.setAttribute('y1', _margins.top);
     axisLine.setAttribute('y2', height - _margins.bottom);
 
     // if no axis remove the axis line after creating it
-    if (!this.showAxisLine) {
+    if (!this.attr('showAxisLine')()) {
       axisLine.remove();
     }
 
@@ -174,28 +198,28 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       }
       axisTitleText.textContent = title;
 
-      const orientation =
-        this.orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
+      const orientationDirection =
+        orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
-      let x = (this.labelPosition === 'outside' ? this.tickLength : 0) * orientation;
+      let x = (labelPosition === 'outside' ? this.tickLength : 0) * orientationDirection;
 
       axisTitleText.setAttribute('x', x)
       axisTitleText.setAttribute('y', _margins.top)
-      axisTitleText.setAttribute('dy', this.labelPosition === 'outside' ? '0.9em' : '-0.9em')
-      axisTitleText.setAttribute('dx', this.labelPosition === 'outside' ? `${5 * orientation}px` : `${-2 * orientation}px`)
+      axisTitleText.setAttribute('dy', labelPosition === 'outside' ? '0.9em' : '-0.9em')
+      axisTitleText.setAttribute('dx', labelPosition === 'outside' ? `${5 * orientationDirection}px` : `${-2 * orientationDirection}px`)
 
 
 
-      axisTitleText.setAttribute('text-anchor', ~orientation ? 'start' : 'end');
+      axisTitleText.setAttribute('text-anchor', ~orientationDirection ? 'start' : 'end');
       // axisTitleText.setAttribute('text-anchor','start');
 
       // axisTitleText.setAttribute(
       //   'text-anchor',
       //   this.tickPosition === 'outside'
-      //     ? ~orientation
+      //     ? ~orientationDirection
       //       ? 'end'
       //       : 'start'
-      //     : ~orientation
+      //     : ~orientationDirection
       //     ? 'start'
       //     : 'end'
       // );
@@ -226,7 +250,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
     this.objects.forEach(obj => obj.draw())
 
-    return this.parentNode;
+    return this; // .parentNode; // .update();
   };
 }
 

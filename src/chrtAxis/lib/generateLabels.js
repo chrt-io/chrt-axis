@@ -16,11 +16,11 @@ export default function generateLabels(labels,name,callback) {
       this.g.appendChild(labelGroup);
 
       const label = create('text')
-      label.textContent = this.labelFormat(d.value, i, arr);
+      label.textContent = this.format()?.(d.value, i, arr);
       label.setAttribute('fill', this.labelTextColor)
-      if(label.label) {
-        label.textContent = `${this.labelFormat(label.value, i, arr)}${d.label.text}`;
-      }
+      // if(d.label) {
+      //   label.textContent = `${this.format()(d.value, i, arr)}${d.label.text}`;
+      // }
       labelGroup.appendChild(label);
     }
     if(callback) {

@@ -1,21 +1,4 @@
-import { isNull } from '~/helpers';
+// set the position of the axis
 export default function zero(value) {
-  if(isNull(value)) {
-    return this._zero;
-  }
-
-  if (typeof value === 'function') {
-    // something will go here
-  } else {
-    this._zero = value;
-  }
-  return this;
-}
-export function hideZero(value = true) {
-  if (typeof value === 'function') {
-    // something will go here
-  } else {
-    this.showZero = !value;
-  }
-  return this;
+  return this.attr('zero', value)
 }

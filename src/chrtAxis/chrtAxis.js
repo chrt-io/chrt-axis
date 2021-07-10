@@ -4,6 +4,9 @@ import {
   setTickLength,
   setTickPosition,
   setLabelPosition,
+  labelColor,
+  ticksColor,
+  ticksWidth,
   showAxis,
   hideAxis,
   ticks,
@@ -22,7 +25,7 @@ import {
   format,
   minor,
   zero,
-  hideZero,
+  // hideZero,
   label,
   interval,
   title,
@@ -42,32 +45,36 @@ function chrtAxis(name) {
   this.updater = true;
 
   this.name = name;
-  this.strokeWidth = DEFAULT_LINE_WIDTH;
-  this.stroke = DEAULT_LINE_COLOR;
+  this.attr('stroke', DEAULT_LINE_COLOR);
+  this.attr('strokeWidth', DEFAULT_LINE_WIDTH);
+  this.attr('labelsColor', DEAULT_LINE_COLOR);
+  this.attr('ticksColor', DEAULT_LINE_COLOR);
+  this.attr('ticksWidth', DEFAULT_LINE_WIDTH);
+  this.attr('ticksLength', TICK_LENGTH);
+  this.attr('ticksPosition', TICK_POSITION);
+  this.attr('labelsPosition', LABEL_POSITION);
+  this.attr('interval', null);
+  this.attr('labelFormat', d => d);
   this.tickTextColor = DEAULT_TICK_TEXT_COLOR;
-  this.showAxisLine = true;
+  this.attr('showAxisLine', true);
+  this.attr('zero', null);
   this.ticksFilter = null;
   this.labelsFilter = null;
-  this.tickLength = TICK_LENGTH;
-  this.tickPosition = TICK_POSITION;
-  this.labelPosition = LABEL_POSITION;
-  this.labelFormat = d => d;
-  this.showMinorTicks = false;
-  this._zero = null;
-  this.showZero = true;
-  this._label = null;
+  // this.tickPosition = TICK_POSITION;
+  // this.labelPosition = LABEL_POSITION;
+  // this.labelFormat = d => d;
+  this.attr('showMinorTicks', false);
+  // this._label = null;
   this._ticks = [];
   this._fixedTicks = null;
-  this._interval = null;
+
 
   this._classNames = ['chrt-axis'];
 
   this.draw = () => {
-    if (!this.parentNode.scales[this._coordinates][name]) {
-      return this.parentNode;
-    }
-    return this.parentNode;
+    return this;
   };
+
 }
 
 chrtAxis.prototype = Object.create(chrtGeneric.prototype);
@@ -76,12 +83,23 @@ chrtAxis.parent = chrtGeneric.prototype;
 
 chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   width: lineWidth,
+  strokeWidth: lineWidth,
+  lineWidth,
   color: lineColor,
+  stroke: lineColor,
   setTickLength,
+  ticksLength: setTickLength,
+  tickLength: setTickLength,
   setTickPosition,
   setLabelPosition,
+  tickPosition: setTickPosition,
+  labelPosition: setLabelPosition,
+  ticksPosition: setTickPosition,
+  labelsPosition: setLabelPosition,
   showAxis,
   hideAxis,
+  ticksColor,
+  ticksWidth,
   ticks,
   filterTicks: showTicks,
   filter: showTicks,
@@ -92,6 +110,7 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   firstAndLastTicks,
   labels,
   filterLabels: showTicks,
+  labelColor,
   showLabels,
   hideLabels,
   firstLabel,
@@ -101,7 +120,7 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   format,
   minor,
   zero,
-  hideZero,
+  // hideZero,
   label,
   interval,
   title,

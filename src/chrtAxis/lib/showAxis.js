@@ -1,12 +1,5 @@
-import { isNull } from '~/helpers';
-export default function showAxis(value) {
-  if (typeof value === 'function') {
-    // something will go here
-  } else {
-    this.showAxisLine = isNull(value) ? true : value;
-  }
-
-  return this;
+ export default function showAxis(value = true) {
+  return this.attr('showAxisLine', value)
 }
 
 export function hideAxis() {
