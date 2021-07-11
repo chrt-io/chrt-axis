@@ -21,3 +21,4 @@ export { default as customZeroOrdinalXaxisOrdinalYaxis } from './ordinal-x-axis-
 export { default as minorTickslinearXaxisLinearYaxis } from './linear-x-axis-y-axis-minor-ticks';
 export { default as customSuffixes } from './labelSuffix-x-axis-y-axis';
 export { default as linearAxesWithColumnsPadding } from './linear-x-axis-y-axis-with-columns-padding';
+export { default as chrtLine } from './x-ordinal-y-linear';

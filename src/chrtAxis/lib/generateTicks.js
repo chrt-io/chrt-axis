@@ -16,8 +16,8 @@ export default function generateTicks(ticks,name,callback) {
 
 
       const tickLine = create('line');
-      tickLine.setAttribute('stroke', this.stroke)
-      tickLine.setAttribute('stroke-width', this.strokeWidth);
+      tickLine.setAttribute('stroke', this.stroke()(tick,i,arr))
+      tickLine.setAttribute('stroke-width', this.strokeWidth()(tick,i,arr));
       tickGroup.appendChild(tickLine);
 
 

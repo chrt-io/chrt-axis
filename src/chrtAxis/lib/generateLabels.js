@@ -17,7 +17,7 @@ export default function generateLabels(labels,name,callback) {
 
       const label = create('text')
       label.textContent = this.format()?.(d.value, i, arr);
-      label.setAttribute('fill', this.labelTextColor)
+      label.setAttribute('fill', this.labelColor()(d.value, i, arr))
       // if(d.label) {
       //   label.textContent = `${this.format()(d.value, i, arr)}${d.label.text}`;
       // }
