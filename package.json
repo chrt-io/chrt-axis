@@ -1,6 +1,6 @@
 {
   "name": "chrt-axis",
-  "version": "0.0.36",
+  "version": "0.0.35",
   "description": "Axis component for Chrt",
   "keywords": [
     "chrt",
@@ -9,14 +9,14 @@
     "visualization"
   ],
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "dist/chrt-axis.js",
+  "module": "dist/chrt-axis.esm.js",
   "jsdelivr": "dist/chrt-axis.min.js",
   "unpkg": "dist/chrt-axis.min.js",
   "exports": {
     "umd": "./dist/chrt-axis.min.js",
     "require": "./dist/chrt-axis.node.js",
-    "default": "./src/index.js"
+    "default": "./dist/chrt-axis.esm.js"
   },
   "watch": {
     "build": {
