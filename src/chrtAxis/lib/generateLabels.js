@@ -1,7 +1,6 @@
 import { createSVG as create } from '~/layout';
 
 export default function generateLabels(labels,name,callback) {
-  // console.log('generateLabels', labels, name)
   labels.forEach((d, i, arr) => {
     let labelGroup = this.g.querySelector(
       `[data-id='label-${name}-${d.value}']`

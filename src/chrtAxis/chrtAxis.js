@@ -109,7 +109,7 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   lastTick,
   firstAndLastTicks,
   labels,
-  filterLabels: showTicks,
+  filterLabels: showLabels,
   labelColor,
   showLabels,
   hideLabels,

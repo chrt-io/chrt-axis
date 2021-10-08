@@ -125,25 +125,6 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
         if(this.labelsFilter) {
           tick.visibleLabel = tick.visibleLabel && this.labelsFilter(tick.value, i, arr);
         }
-
-        // console.log('---->','tick.visibleLabel', tick.visibleLabel, tick)
-
-        // tick.label = null;
-        // if(tick.visibleLabel && this._label) {
-        //   if(!isNull(this._label.value) && this._label.value === tick.value) {
-        //     tick.label = this._label;
-        //     this._label.tickIndex = tick.index;
-        //   }
-        // }
-        //
-        // if(tick.visibleLabel && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
-        //   if(!isNull(this._label.position)) {
-        //     tick.label = this._label;
-        //     this._label.tickIndex = tick.index;
-        //   }
-        // }
-
-
         return tick;
       })
       .filter(d => d.visible || d.visibleLabel) // decrease the number of ticks rendered in the DOM
