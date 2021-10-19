@@ -136,7 +136,7 @@ function chrtAxisTitle(text) {
     }
     if (!this.g) {
       this.g = create('g');
-      this.g.setAttribute('data-id', this._id);
+      // this.g.setAttribute('data-id', this._id);
       this.g.setAttribute('data-name', 'axis-title');
     }
     if (!this.parentNode.g.querySelector(`${name}AxisTitle-${this.id()}`)) {

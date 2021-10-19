@@ -15,7 +15,7 @@ function xAxisRange() {
     }
     if (!this.g) {
       this.g = create('g');
-      this.g.setAttribute('data-id', this._id);
+      // this.g.setAttribute('data-id', this._id);
       this.g.setAttribute('data-name', 'axis-range');
     }
     if (!this.parentNode.g.querySelector(`${name}AxisRange-${this.id()}`)) {
