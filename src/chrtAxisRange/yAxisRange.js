@@ -30,7 +30,7 @@ function yAxisRange() {
     const strokeOpacity = this.attr('strokeOpacity')();
     const strokeWidth = this.attr('strokeWidth')();
 
-    const orientation = this.parentNode.orientation === DEFAULT_ORIENTATION[this.parentNode._name] ? 1 : -1;
+    const orientation = this.parentNode.orient()() === DEFAULT_ORIENTATION[this.parentNode._name] ? 1 : -1;
 
     const { scales, width, _margins } = this.parentNode.parentNode;
 
@@ -48,7 +48,7 @@ function yAxisRange() {
       this.g.appendChild(this.path);
     }
 
-    if (isNull(from) && isNull(to)) {
+    if (isNull(from) && isNull(to) || isNaN(from) && isNaN(to)) {
       return;
     }
 
@@ -63,8 +63,8 @@ function yAxisRange() {
       this.path = null;
     } else {
       const d = [
-        [this.parentNode.strokeWidth, from],
-        [this.parentNode.strokeWidth, to],
+        [this.parentNode.strokeWidth()(), from],
+        [this.parentNode.strokeWidth()(), to],
         [width - (_margins.right + _margins.left), to],
         [width - (_margins.right + _margins.left), from]
       ];
@@ -100,7 +100,7 @@ function yAxisRange() {
       }
       const line = this.lines[index];
 
-      line.setAttribute('x1', this.parentNode.strokeWidth);
+      line.setAttribute('x1', this.parentNode.strokeWidth()());
       line.setAttribute('x2', width - (_margins.left + _margins.right));
       line.setAttribute('y1', position);
       line.setAttribute('y2', position);

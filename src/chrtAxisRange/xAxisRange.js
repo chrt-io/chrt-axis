@@ -63,8 +63,8 @@ function xAxisRange() {
       this.path = null;
     } else {
       const d = [
-        [from, -this.parentNode.strokeWidth],
-        [to, -this.parentNode.strokeWidth],
+        [from, -this.parentNode.strokeWidth()()],
+        [to, -this.parentNode.strokeWidth()()],
         [to, -(height - (_margins.top + _margins.bottom))],
         [from, -(height - (_margins.top + _margins.bottom))],
       ];
