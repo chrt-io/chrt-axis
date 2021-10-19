@@ -1,5 +1,5 @@
 import * as chrt from 'chrt';
-import { xAxis } from '~/chrtAxis'
+import { xAxis } from '../../../src/chrtAxis'
 const minutes = 10;
 const data = new Array(minutes).fill(1).map((d,i) => {
   return {

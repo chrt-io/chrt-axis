@@ -1,7 +1,7 @@
 import chrtAxisRange from './chrtAxisRange';
-import { isNull } from '~/helpers';
-import { createSVG as create } from '~/layout';
-import { DEFAULT_ORIENTATION } from '~/constants';
+import { isNull } from '../helpers';
+import { createSVG as create } from '../layout';
+import { DEFAULT_ORIENTATION } from '../constants';
 
 function xAxisRange() {
   chrtAxisRange.call(this);

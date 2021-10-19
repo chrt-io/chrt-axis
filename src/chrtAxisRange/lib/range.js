@@ -1,4 +1,4 @@
-import { isNull } from '~/helpers';
+import { isNull } from '../../helpers';
 export default function range(values) {
   if(isNull(values)) {
     return this;

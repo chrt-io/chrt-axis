@@ -1,5 +1,5 @@
 // legacy method, we can remove it from and use labelFormat
-import { isNull } from '~/helpers';
+import { isNull } from '../../helpers';
 import labelFormat from './labelFormat';
 export default function label(text, options = {}) {
   const _options = Object.assign({position: 'last'}, options);

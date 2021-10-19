@@ -1,4 +1,4 @@
-import { isNull } from '~/helpers';
+import { isNull } from '../../helpers';
 
 export default function labels(labels) {
   if (isNull(labels)) {

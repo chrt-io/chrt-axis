@@ -1,5 +1,5 @@
 import * as chrt from 'chrt';
-import {xAxis,yAxis} from '~/chrtAxis'
+import {xAxis,yAxis} from '../../../src/chrtAxis'
 
 const data = [
   {

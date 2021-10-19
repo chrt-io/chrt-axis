@@ -1,4 +1,4 @@
-import { createSVG as create } from '~/layout';
+import { createSVG as create } from '../../layout';
 
 export default function generateTicks(ticks,name,callback) {
   ticks.forEach((tick, i, arr) => {

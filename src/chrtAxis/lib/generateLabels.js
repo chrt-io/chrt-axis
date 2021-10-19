@@ -1,4 +1,4 @@
-import { createSVG as create } from '~/layout';
+import { createSVG as create } from '../../layout';
 
 export default function generateLabels(labels,name,callback) {
   labels.forEach((d, i, arr) => {

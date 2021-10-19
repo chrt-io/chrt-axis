@@ -1,5 +1,5 @@
-import { isNull } from '~/helpers';
-import { ORIENTATIONS, DEFAULT_ORIENTATION } from '~/constants';
+import { isNull } from '../../helpers';
+import { ORIENTATIONS, DEFAULT_ORIENTATION } from '../../constants';
 
 export default function orient(value) {
   let orientation = value;

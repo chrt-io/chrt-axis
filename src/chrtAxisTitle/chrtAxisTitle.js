@@ -1,6 +1,6 @@
 import chrtGeneric from 'chrt-object';
 import { color, align, valign, offset } from './lib';
-import { createSVG as create } from '~/layout';
+import { createSVG as create } from '../layout';
 
 const DEFAULT_COLOR = '#000';
 const DEFAULT_ALIGNMENT = 'right';

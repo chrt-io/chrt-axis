@@ -1,9 +1,9 @@
-import { isNull } from '~/helpers';
-import { createSVG as create } from '~/layout';
+import { isNull } from '../helpers';
+import { createSVG as create } from '../layout';
 import generateTicks from './lib/generateTicks';
 import generateLabels from './lib/generateLabels';
 import chrtAxis from './chrtAxis';
-import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '~/constants';
+import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '../constants';
 
 function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
   if(typeof arguments[0] === 'string') {
