@@ -13,23 +13,24 @@ A chrtAxis is formed by a set of visual elements:
 One chart can have multiple Axes, and they can be oriented (left/right and top/bottom).
 
 ## Installing
-You can install chrt as a standalone module `npm install chrt-axis` or as part of the `chrt` package.
-Otherwise you can download the code or use global content delivery network like UNPKG.
+For use with Webpack, Rollup, or other Node-based bundlers, `chrt-axis` can be installed as a standalone module via a package manager such as Yarn or npm.
+```bash
+npm install chrt-axis chrt-core
+```
+
+`chrt-axis` can be used as part of the whole `chrt` package:
+```bash
+npm install chrt
+```
+
+`chrt-axis` is distributed as an ES module; see [Sindre Sorhus’s guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for help upgrading.
 
 ## Usage
 
-### Script Tag
-```
-<script src="https://unpkg.com/chrt@latest/dist/chrt.min.js"></script>
-<script>
-    var chart = new chrt.Chrt();
-</script>
-```
-
 ### ES6 / Bundlers (Webpack, Rollup, etc.)
-```
-import Chrt from "chrt-core";
-import { xAxis, yAxis } from "chrt-axis";
+```js
+import Chrt from 'chrt-core';
+import { xAxis, yAxis } from 'chrt-axis';
 
 Chrt()
     .add(
@@ -40,8 +41,42 @@ Chrt()
     )
 ```
 
+### Script Tag
+```html
+<script src="https://unpkg.com/chrt@latest/dist/chrt-axis.min.js"></script>
+<script>
+    var xaxis = new xAxis();
+    var yaxis = new yAxis();
+</script>
+```
+
+### Vanilla HTML
+In vanilla HTML, `chrt-axis` can be imported as an ES module, (i.e. from Skypack):
+
+```html
+<div id="chart"></div>
+
+<script type="module">
+
+import Chrt from 'https://cdn.skypack.dev/chrt-core';
+
+import {xAxis, yAxis} from 'https://cdn.skypack.dev/chrt-axis';
+
+
+const chart = Chrt()
+  .data([1,2,3,4,5,6])
+  .add(xAxis())
+  .add(yAxis())
+
+document
+    .querySelector('#chart')
+    .appendChild(chart.node())
+
+</script>
+```
+
 ## API Reference
-- xAxis
+* [xAxis](#xaxis)
 - yAxis
 - chrtAxisRange
 
