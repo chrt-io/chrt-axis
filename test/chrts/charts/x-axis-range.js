@@ -1,31 +1,35 @@
 import * as chrt from 'chrt';
-import { xAxis } from '../../../src/chrtAxis'
+import { xAxis, yAxis } from '../../../src/chrtAxis'
 import { xAxisRange } from '../../../src/chrtAxisRange'
-const days = 28;
-const data = new Array(24 * days).fill(1).map((d,i) => {
-  return {
-    x: new Date(2021,0,Math.floor(i / 24) + 1,i % 24,0),
-    y: Math.sin((i % 360) / Math.PI) * 100,
-  }
-})
+
 
 export default async function(container) {
   const chart = chrt.Chrt()
-    .data(data)
+    .data([2,0,3,10,4,2,1])
     .node(container)
-    .x({scale:'time'})
     .add(xAxis()
-      .interval('day')
-      .format(d => new Intl.DateTimeFormat('en-US', {day: 'numeric'}).format(d))
       .add(
         xAxisRange()
-          .from(new Date(2021,0,5))
-          .to(new Date(2021,0,10))
+          .from(1)
+          .to(2)
           .stroke('#aaa')
           .fill('#ddd')
         )
 
     )
+    .add(xAxis()
+      .orient('top')
+      .lineWidth(3)
+      .add(
+        xAxisRange()
+          .from(3)
+          .to(4)
+          .stroke('#aaa')
+          .fill('#ddd')
+        )
+
+    )
+    .add(yAxis())
 
   return chart;
 }

@@ -60,7 +60,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
         label.setAttribute('dy', `${labelPosition === 'outside' ? -0.25 : 1}em`);
       }
 
-      label.setAttribute('fill', this.labelColor()());
+      label.setAttribute('fill', this.labelsColor()());
     }
   };
 
@@ -79,7 +79,8 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     const { _margins, width, height, scales } = this.parentNode;
 
     const orientation = this.attr('orientation')();
-
+    const orientationDirection =
+      orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
     // if(this._label) {
     //   this._label.tickIndex = -1;
     // }
@@ -222,9 +223,11 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       tickGroup.setAttribute('transform', `translate(${tick.position}, 0)`);
       xAxisTick(tickGroup, tick.visible);
     });
+
+    const labelsPadding = this.attr('labelsPadding')() * orientationDirection;
     generateLabels.call(this, this._ticks, name, (tickGroup, tick) => {
       // console.log('generateTick', name, tick)
-      tickGroup.setAttribute('transform', `translate(${tick.position}, 0)`);
+      tickGroup.setAttribute('transform', `translate(${tick.position + this.attr('labelsOffset')()[0]}, ${this.attr('labelsOffset')()[1] + labelsPadding})`);
       xAxisTick(tickGroup, tick.visibleLabel);
     });
 

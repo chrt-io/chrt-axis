@@ -30,7 +30,7 @@ function xAxisRange() {
     const strokeOpacity = this.attr('strokeOpacity')();
     const strokeWidth = this.attr('strokeWidth')();
 
-    const orientation = this.parentNode.orientation === DEFAULT_ORIENTATION[this.parentNode._name] ? 1 : -1;
+    const orientation = this.parentNode.orient()() === DEFAULT_ORIENTATION[this.parentNode._name] ? 1 : -1;
 
     const { scales, height, _margins } = this.parentNode.parentNode;
 
@@ -43,6 +43,10 @@ function xAxisRange() {
       to = isNull(this._range.to) ? to : _scale(this._range.to);
     }
 
+    if(isNaN(from) || isNaN(to)) {
+      return;
+    }
+
     if (!this.path) {
       this.path = create('path');
       this.g.appendChild(this.path);
@@ -52,7 +56,7 @@ function xAxisRange() {
       return;
     }
 
-    this.g.setAttribute('transform',`translate(0, ${orientation > 0 ? 0 : (height - (_margins.top + _margins.bottom) + this.parentNode.strokeWidth)})`)
+    this.g.setAttribute('transform',`translate(0, ${orientation > 0 ? 0 : (height - (_margins.top + _margins.bottom) + this.parentNode.strokeWidth()() + (orientation > 0 ? 0 : -1))})`)
 
     // the range should be at least 1px thick
     from = isNull(from) ? to : from;
@@ -102,7 +106,7 @@ function xAxisRange() {
 
       line.setAttribute('x1', position);
       line.setAttribute('x2', position);
-      line.setAttribute('y1', -this.parentNode.strokeWidth);
+      line.setAttribute('y1', -this.parentNode.strokeWidth()());
       line.setAttribute('y2', -(height - (_margins.top + _margins.bottom)));
 
       line.setAttribute('stroke', stroke);
