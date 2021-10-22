@@ -73,7 +73,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
         'dy',
         labelPosition === 'outside' ? '0.25em' : '-0.3em'
       );
-      label.setAttribute('fill', this.labelColor()());
+      label.setAttribute('fill', this.labelsColor()());
     }
 
   };
@@ -91,6 +91,8 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     const { _margins, scales, width, height } = this.parentNode;
 
     const orientation = this.attr('orientation')();
+    const orientationDirection =
+      orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);
     this._classNames.forEach(d => this.g.classList.add(d));
@@ -178,10 +180,6 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
         axisTitleText.classList.add('title');
       }
       axisTitleText.textContent = title;
-
-      const orientationDirection =
-        orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
-
       let x = (labelPosition === 'outside' ? this.tickLength : 0) * orientationDirection;
 
       axisTitleText.setAttribute('x', x)
@@ -223,10 +221,11 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       tickGroup.setAttribute('transform', `translate(0, ${tick.position})`);
       yAxisTick(tickGroup, tick.visible);
     });
-    generateLabels.call(this, this._ticks, name, (tickGroup, tick) => {
+    const labelsPadding = this.attr('labelsPadding')() * (orientationDirection * -1);
+    generateLabels.call(this, this._ticks, name, (labelGroup, tick) => {
       // console.log('generateTick', name, tick)
-      tickGroup.setAttribute('transform', `translate(0, ${tick.position})`);
-      yAxisTick(tickGroup, tick.visibleLabel);
+      labelGroup.setAttribute('transform', `translate(${this.attr('labelsOffset')()[0] + labelsPadding}, ${tick.position + this.attr('labelsOffset')()[1]})`);
+      yAxisTick(labelGroup, tick.visibleLabel);
     });
 
     this.objects.forEach(obj => obj.draw())

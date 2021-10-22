@@ -43,6 +43,10 @@ function yAxisRange() {
       to = isNull(this._range.to) ? to : _scale(this._range.to);
     }
 
+    if(isNaN(from) || isNaN(to)) {
+      return;
+    }
+
     if (!this.path) {
       this.path = create('path');
       this.g.appendChild(this.path);

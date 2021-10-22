@@ -4,7 +4,7 @@ import {
   setTickLength,
   setTickPosition,
   setLabelPosition,
-  labelColor,
+  labelsColor,
   ticksColor,
   ticksWidth,
   showAxis,
@@ -21,6 +21,8 @@ import {
   firstLabel,
   lastLabel,
   firstAndLastLabels,
+  labelsOffset,
+  labelsPadding,
   orient,
   format,
   minor,
@@ -48,6 +50,8 @@ function chrtAxis(name) {
   this.attr('stroke', DEAULT_LINE_COLOR);
   this.attr('strokeWidth', DEFAULT_LINE_WIDTH);
   this.attr('labelsColor', DEAULT_LINE_COLOR);
+  this.attr('labelsOffset', [0, 0]);
+  this.attr('labelsPadding', 0);
   this.attr('ticksColor', DEAULT_LINE_COLOR);
   this.attr('ticksWidth', DEFAULT_LINE_WIDTH);
   this.attr('ticksLength', TICK_LENGTH);
@@ -110,12 +114,17 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   firstAndLastTicks,
   labels,
   filterLabels: showLabels,
-  labelColor,
+  labelsColor,
+  labelColor: labelsColor,
   showLabels,
   hideLabels,
   firstLabel,
   lastLabel,
   firstAndLastLabels,
+  labelsOffset,
+  labelsPadding,
+  labelOffset: labelsOffset,
+  labelPadding: labelsPadding,
   orient,
   format,
   minor,
