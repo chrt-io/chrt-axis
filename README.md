@@ -23,7 +23,7 @@ npm install chrt-axis chrt-core
 npm install chrt
 ```
 
-`chrt-axis` is distributed as an ES module; see [Sindre Sorhus’s guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for help upgrading.
+`chrt-axis` is distributed as an ES module; see [Sindre Sorhus’s guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for help.
 
 ## Usage
 
@@ -43,10 +43,19 @@ Chrt()
 
 ### Script Tag
 ```html
-<script src="https://unpkg.com/chrt@latest/dist/chrt-axis.min.js"></script>
+<div id="chart"></div>
+<script src="https://cdn.jsdelivr.net/npm/chrt@latest/dist/chrt.min.js"></script>
 <script>
-    var xaxis = new xAxis();
-    var yaxis = new yAxis();
+
+    chrt.Chrt()
+        .node(document.getElementById('chart'))
+        .data([0,1,2,3,4,5])
+        .add(
+            chrt.xAxis()
+        )
+        .add(
+            chrt.yAxis()
+        )
 </script>
 ```
 
@@ -59,9 +68,7 @@ In vanilla HTML, `chrt-axis` can be imported as an ES module, (i.e. from Skypack
 <script type="module">
 
 import Chrt from 'https://cdn.skypack.dev/chrt-core';
-
 import {xAxis, yAxis} from 'https://cdn.skypack.dev/chrt-axis';
-
 
 const chart = Chrt()
   .data([1,2,3,4,5,6])
