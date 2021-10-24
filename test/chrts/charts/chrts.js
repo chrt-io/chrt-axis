@@ -22,7 +22,8 @@ export { default as minorTickslinearXaxisLinearYaxis } from './linear-x-axis-y-a
 export { default as customSuffixes } from './labelSuffix-x-axis-y-axis';
 export { default as linearAxesWithColumnsPadding } from './linear-x-axis-y-axis-with-columns-padding';
 export { default as chrtLine } from './x-ordinal-y-linear';
-export { default as fixedLabels } from './y-fixed-labels';
+export { default as yFixedLabels } from './y-fixed-labels';
+export { default as xFixedLabels } from './x-fixed-labels';
 export { default as xAxisRange } from './x-axis-range';
 export { default as yAxisRange } from './y-axis-range';
 export { default as labelsPadding } from './axis-labelPadding';

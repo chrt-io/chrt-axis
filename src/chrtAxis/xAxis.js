@@ -90,6 +90,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }
+    const isLog = scales[coords.x][name].isLog();
     // console.log('TICKS', ticks, `scales[${coords.x}][${name}]`,scales[coords.x][name].domain, scales[coords.x][name].range)
     this._ticks = ticks
       .map((tick, i , arr) => {
@@ -208,7 +209,6 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       this.g.appendChild(axisTitleText);
     }
 
-    const isLog = scales[coords.x][name].isLog();
     this.g.querySelectorAll('g').forEach(d => {
       const tickName = d.getAttribute('data-id');
 

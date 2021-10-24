@@ -109,6 +109,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       ticks.reverse();
     }
     // console.log('TICKS', ticks, `scales[${coords.y}][${name}]`,scales[coords.y][name].domain, scales[coords.y][name].range)
+    const isLog = scales[coords.y][name].isLog();
     this._ticks = ticks
       .map((tick, i , arr) => {
         tick.position = scales[coords.y][name](tick.value);
@@ -206,7 +207,6 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       this.g.appendChild(axisTitleText);
     }
 
-    const isLog = scales[coords.y][name].isLog();
     this.g.querySelectorAll('g').forEach(d => {
       const tickName = d.getAttribute('data-id');
 

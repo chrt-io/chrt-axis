@@ -18,12 +18,12 @@ For use with Webpack, Rollup, or other Node-based bundlers, `chrt-axis` can be i
 npm install chrt-axis chrt-core
 ```
 
-`chrt-axis` can be used as part of the whole `chrt` package:
+`chrt-axis` can be used as part of the `chrt` package:
 ```bash
 npm install chrt
 ```
 
-`chrt-axis` is distributed as an ES module; see [Sindre Sorhus’s guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for help.
+`chrt-axis` is distributed as an ES module; see [Sindre Sorhus’s guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for more information.
 
 ## Usage
 
@@ -33,30 +33,13 @@ import Chrt from 'chrt-core';
 import { xAxis, yAxis } from 'chrt-axis';
 
 Chrt()
+    .data([1,2,3,4,5,6])
     .add(
         xAxis()
     )
     .add(
         yAxis()
     )
-```
-
-### Script Tag
-```html
-<div id="chart"></div>
-<script src="https://cdn.jsdelivr.net/npm/chrt@latest/dist/chrt.min.js"></script>
-<script>
-
-    chrt.Chrt()
-        .node(document.getElementById('chart'))
-        .data([0,1,2,3,4,5])
-        .add(
-            chrt.xAxis()
-        )
-        .add(
-            chrt.yAxis()
-        )
-</script>
 ```
 
 ### Vanilla HTML
@@ -79,6 +62,25 @@ document
     .querySelector('#chart')
     .appendChild(chart.node())
 
+</script>
+```
+
+### Script Tag
+For legacy environments, you can load the `chrt` UMD bundle from an npm-based CDN such as [jsdelivr](https://www.jsdelivr.com/package/npm/chrt):
+```html
+<div id="chart"></div>
+<script src="https://cdn.jsdelivr.net/npm/chrt@latest/dist/chrt.min.js"></script>
+<script>
+
+    chrt.Chrt()
+        .node(document.getElementById('chart'))
+        .data([0,1,2,3,4,5])
+        .add(
+            chrt.xAxis()
+        )
+        .add(
+            chrt.yAxis()
+        )
 </script>
 ```
 
