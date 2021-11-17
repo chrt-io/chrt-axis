@@ -24,7 +24,6 @@ export default async function(container) {
     )
     .add(
       yAxis()
-        .zero(new Date((data[0].x + data[1].x)/2))
     )
     .add(chrt.chrtLine().data(data))
 

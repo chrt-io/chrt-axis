@@ -150,7 +150,8 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     const _zero = this.attr('zero')();
     const zero = isNull(_zero) ? scaleX.domain[0] : _zero;
     // let axisLineX = scaleX.isLog() ? scaleX.range[0] : scaleX(zero) - _margins.left;
-    let axisLineX = scaleX(zero) - _margins.left;
+    let axisLineX = isNull(_zero) ? scaleX.range[0] : scaleX(zero) - _margins.left;
+    // console.log('zero',zero,'domain', scaleX.domain)
     // console.log(this.parentNode._padding)
     // console.log('scaleX', scaleX.transformation, scaleX.domain, 'zero', zero, _zero)
     if(scaleX.transformation === 'ordinal' &&
