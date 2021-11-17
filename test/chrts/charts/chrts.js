@@ -10,6 +10,7 @@ export { default as timeSecondsXaxisLinearYaxis } from './time-seconds-x-axis-li
 export { default as timeMinutesXaxisLinearYaxis } from './time-minutes-x-axis-linear-y-axis';
 export { default as timeHoursXaxisLinearYaxis } from './time-hours-x-axis-linear-y-axis';
 export { default as timeDaysXaxisLinearYaxis } from './time-days-x-axis-linear-y-axis';
+export { default as timeFixedZeroDaysXaxisLinearYaxis } from './time-fixed-zero-days-x-axis-linear-y-axis';
 export { default as timeBidiurnalXaxisLinearYaxis } from './time-bidiurnal-x-axis-linear-y-axis';
 export { default as timeWeekXaxisLinearYaxis } from './time-weeks-x-axis-linear-y-axis';
 export { default as timeFortnightsXaxisLinearYaxis } from './time-fortnights-x-axis-linear-y-axis';
