@@ -1,4 +1,5 @@
-import { createSVG as create } from '../../layout';
+import { utils } from 'chrt-object';
+const { createSVG: create } = utils;
 
 export default function generateLabels(labels,name,callback) {
   labels.forEach((d, i, arr) => {

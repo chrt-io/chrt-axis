@@ -1,9 +1,11 @@
-import { isNull } from '../helpers';
-import { createSVG as create } from '../layout';
+// import { isNull } from '../helpers';
+// import { createSVG as create } from '../layout';
 import generateTicks from './lib/generateTicks';
 import generateLabels from './lib/generateLabels';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '../constants';
+import { utils } from 'chrt-object';
+const { isNull, createSVG: create } = utils;
 
 function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
   if(typeof arguments[0] === 'string') {
@@ -132,7 +134,8 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       .filter(d => d.visible || d.visibleLabel) // decrease the number of ticks rendered in the DOM
 
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);
-    this._classNames.forEach(d => this.g.classList.add(d));
+    this.g.classList.remove(...this.g.classList)
+    this.g.classList.add(...this._classNames);
 
     const axisY =
       orientation === DEFAULT_ORIENTATION[this._name]

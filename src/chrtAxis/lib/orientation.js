@@ -1,5 +1,8 @@
-import { isNull } from '../../helpers';
+import { utils } from 'chrt-object';
 import { ORIENTATIONS, DEFAULT_ORIENTATION } from '../../constants';
+
+const { isNull } = utils;
+
 
 export default function orient(value) {
   let orientation = value;

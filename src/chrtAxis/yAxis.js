@@ -1,9 +1,11 @@
-import { isNull } from '../helpers';
-import { createSVG as create } from '../layout';
+// import { isNull } from '../helpers';
+// import { createSVG as create } from '../layout';
 import generateTicks from './lib/generateTicks';
 import generateLabels from './lib/generateLabels';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '../constants';
+import { utils } from 'chrt-object';
+const { isNull, createSVG: create } = utils;
 
 function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
   // ticksNumber = isNull(ticksNumber) ? TICKS_DEFAULT : ticksNumber;
@@ -95,7 +97,8 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       orientation === DEFAULT_ORIENTATION[this._name] ? 1 : -1;
 
     this.g.setAttribute('id', `${name}Axis-${this.id()}`);
-    this._classNames.forEach(d => this.g.classList.add(d));
+    this.g.classList.remove(...this.g.classList)
+    this.g.classList.add(...this._classNames);
 
     const axisX =
       orientation === DEFAULT_ORIENTATION[this._name] ? _margins.left : width - _margins.right;

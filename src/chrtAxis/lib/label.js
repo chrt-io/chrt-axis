@@ -1,6 +1,8 @@
 // legacy method, we can remove it from and use labelFormat
-import { isNull } from '../../helpers';
 import labelFormat from './labelFormat';
+import { utils } from 'chrt-object';
+const { isNull } = utils;
+
 export default function label(text, options = {}) {
   const _options = Object.assign({position: 'last'}, options);
   return labelFormat.call(this, (d, i, arr) => {

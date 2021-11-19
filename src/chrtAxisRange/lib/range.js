@@ -1,4 +1,6 @@
-import { isNull } from '../../helpers';
+import { utils } from 'chrt-object';
+const { isNull } = utils;
+
 export default function range(values) {
   if(isNull(values)) {
     return this;

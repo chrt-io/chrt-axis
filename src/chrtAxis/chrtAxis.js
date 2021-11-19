@@ -32,7 +32,8 @@ import {
   interval,
   title,
 } from './lib';
-import chrtGeneric from 'chrt-object';
+import chrtObject from 'chrt-object';
+
 
 const DEFAULT_LINE_WIDTH = 1;
 const DEAULT_LINE_COLOR = '#000';
@@ -42,7 +43,7 @@ const TICK_POSITION = 'outside';
 const LABEL_POSITION = 'outside';
 
 function chrtAxis(name) {
-  chrtGeneric.call(this);
+  chrtObject.call(this);
   this.type = 'axis';
   this.updater = true;
 
@@ -81,9 +82,9 @@ function chrtAxis(name) {
 
 }
 
-chrtAxis.prototype = Object.create(chrtGeneric.prototype);
+chrtAxis.prototype = Object.create(chrtObject.prototype);
 chrtAxis.prototype.constructor = chrtAxis;
-chrtAxis.parent = chrtGeneric.prototype;
+chrtAxis.parent = chrtObject.prototype;
 
 chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   width: lineWidth,

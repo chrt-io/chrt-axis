@@ -1,4 +1,4 @@
-import chrtGeneric from 'chrt-object';
+import chrtObject from 'chrt-object';
 import {
   color,
   stroke,
@@ -18,7 +18,7 @@ const DEFAULT_FILL_OPACITY = 1;
 
 function chrtAxisRange() {
   // console.log('chrtAxisRange', this)
-  chrtGeneric.call(this);
+  chrtObject.call(this);
   this.type = 'axis-range';
   this.g = null;
   this.attr('fill', DEFAULT_FILL_COLOR);
@@ -45,9 +45,9 @@ function chrtAxisRange() {
   return this.parentNode;
 }
 
-chrtAxisRange.prototype = Object.create(chrtGeneric.prototype);
+chrtAxisRange.prototype = Object.create(chrtObject.prototype);
 chrtAxisRange.prototype.constructor = chrtAxisRange;
-chrtAxisRange.parent = chrtGeneric.prototype;
+chrtAxisRange.parent = chrtObject.prototype;
 
 chrtAxisRange.prototype = Object.assign(chrtAxisRange.prototype, {
   color,

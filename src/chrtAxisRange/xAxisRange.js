@@ -1,7 +1,9 @@
 import chrtAxisRange from './chrtAxisRange';
-import { isNull } from '../helpers';
-import { createSVG as create } from '../layout';
+// import { isNull } from '../helpers';
+// import { createSVG as create } from '../layout';
 import { DEFAULT_ORIENTATION } from '../constants';
+import { utils } from 'chrt-object';
+const { isNull, createSVG: create } = utils;
 
 function xAxisRange() {
   chrtAxisRange.call(this);
@@ -22,7 +24,8 @@ function xAxisRange() {
       this.parentNode.g.appendChild(this.g);
     }
     this.g.setAttribute('id', `${name}AxisRange-${this.id()}`);
-    this._classNames.forEach((d) => this.g.classList.add(d));
+    this.g.classList.remove(...this.g.classList)
+    this.g.classList.add(...this._classNames);
 
     const fill = this.attr('fill')();
     const fillOpacity = this.attr('fillOpacity')();

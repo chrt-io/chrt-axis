@@ -1,6 +1,6 @@
-import chrtGeneric from 'chrt-object';
+import chrtObject, { utils } from 'chrt-object';
 import { color, align, valign, offset } from './lib';
-import { createSVG as create } from '../layout';
+const { createSVG: create } = utils;
 
 const DEFAULT_COLOR = '#000';
 const DEFAULT_ALIGNMENT = 'right';
@@ -8,7 +8,7 @@ const DEFAULT_VERTICAL_ALIGNMENT = 'top';
 
 function chrtAxisTitle(text) {
   // console.log('chrtAxisTitle', this, 'text ->', text);
-  chrtGeneric.call(this);
+  chrtObject.call(this);
 
   this.type = 'axis-title';
   this.g = null;
@@ -143,10 +143,8 @@ function chrtAxisTitle(text) {
       this.parentNode.g.appendChild(this.g);
     }
     this.g.setAttribute('id', `${name}AxisTitle-${this.id()}`);
-    this._classNames.forEach((d) => this.g.classList.add(d));
-
-
-
+    this.g.classList.remove(...this.g.classList)
+    this.g.classList.add(...this._classNames);
 
     // if (scales && scales.x[this.parentNode.name]) {
     //   const _scale = scales.x[this.parentNode.name];
@@ -169,9 +167,9 @@ function chrtAxisTitle(text) {
   };
 }
 
-chrtAxisTitle.prototype = Object.create(chrtGeneric.prototype);
+chrtAxisTitle.prototype = Object.create(chrtObject.prototype);
 chrtAxisTitle.prototype.constructor = chrtAxisTitle;
-chrtAxisTitle.parent = chrtGeneric.prototype;
+chrtAxisTitle.parent = chrtObject.prototype;
 
 chrtAxisTitle.prototype = Object.assign(chrtAxisTitle.prototype, {
   color,
