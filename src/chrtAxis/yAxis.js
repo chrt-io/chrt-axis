@@ -4,7 +4,7 @@ import generateTicks from './lib/generateTicks';
 import generateLabels from './lib/generateLabels';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '../constants';
-import { utils } from 'chrt-object';
+import { utils, cssDisplay } from 'chrt-object';
 const { isNull, createSVG: create } = utils;
 
 function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
@@ -91,6 +91,8 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       return this.parentNode;
     }
     const { _margins, scales, width, height } = this.parentNode;
+
+    cssDisplay.call(this, this.attr('display')());
 
     const orientation = this.attr('orientation')();
     const orientationDirection =

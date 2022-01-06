@@ -1,4 +1,4 @@
-import chrtObject, { utils } from 'chrt-object';
+import chrtObject, { utils, cssDisplay } from 'chrt-object';
 import { color, align, valign, offset } from './lib';
 const { createSVG: create } = utils;
 
@@ -21,11 +21,6 @@ function chrtAxisTitle(text) {
 
   const xAxisDraw = () => {
     const fill = this.attr('fill')();
-    // const fillOpacity = this.attr('fillOpacity')();
-    // const stroke = this.attr('stroke')();
-    // const strokeOpacity = this.attr('strokeOpacity')();
-    // const strokeWidth = this.attr('strokeWidth')();
-
     const { width, _margins } = this.parentNode.parentNode;
 
     let x = 0;
@@ -142,6 +137,9 @@ function chrtAxisTitle(text) {
     if (!this.parentNode.g.querySelector(`${name}AxisTitle-${this.id()}`)) {
       this.parentNode.g.appendChild(this.g);
     }
+
+    cssDisplay.call(this, this.attr('display')());
+
     this.g.setAttribute('id', `${name}AxisTitle-${this.id()}`);
     this.g.classList.remove(...this.g.classList)
     this.g.classList.add(...this._classNames);

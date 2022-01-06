@@ -31,3 +31,5 @@ export { default as xAxisRange } from './x-axis-range';
 export { default as yAxisRange } from './y-axis-range';
 export { default as labelsPadding } from './axis-labelPadding';
 export { default as labelsOffset } from './axis-labelOffset';
+export { default as linearXaxisLinearYaxisInvertedDomains } from './linear-x-axis-y-axis-inverted-domains';
+export { default as linearXaxisLinearYaxisInvertedRange } from './linear-x-axis-y-axis-inverted-range';
