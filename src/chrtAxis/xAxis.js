@@ -94,42 +94,30 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     if(this._label && this._label.position === 'last') {
       ticks.reverse();
     }
-    const isLog = scales[coords.x][name].isLog();
+    // const isLog = scales[coords.x][name].isLog();
     // console.log('TICKS', ticks, `scales[${coords.x}][${name}]`,scales[coords.x][name].domain, scales[coords.x][name].range)
+    // console.log(`this.attr('showMinorTicks')()`, this.attr('showMinorTicks')())
     this._ticks = ticks
       .map((tick, i , arr) => {
         tick.position = scales[coords.x][name](tick.value);
         let visible = tick.position >= _margins.left && tick.position <= width - _margins.right;
+        // console.log('1st visible', visible)
         // visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
         visible = visible && (this.attr('showMinorTicks')() || !tick.isMinor);
-        visible = visible && ((!isLog) || (isLog && !tick.isMinor));
+        // console.log('2nd visible', visible)
+        // visible = visible && ((!isLog) || (isLog && !tick.isMinor));
+
+        // console.log('VISIBLE', visible, `isLog:`, isLog, 'tick.isMinor', tick.isMinor)
 
         tick.visible = visible;
         if(this.ticksFilter) {
           tick.visible = tick.visible && this.ticksFilter(tick.value, i, arr);
         }
 
-        tick.visibleLabel = visible;
+        tick.visibleLabel = visible && (this.attr('showMinorLabels')() || !tick.isMinor);
         if(this.labelsFilter) {
           tick.visibleLabel = tick.visibleLabel && this.labelsFilter(tick.value, i, arr);
         }
-        // console.log('this._label', this._label)
-        // tick.label = null;
-        // if(tick.visibleLabel && this._label) {
-        //   if(!isNull(this._label.value) && this._label.value === tick.value) {
-        //     tick.label = this._label;
-        //     this._label.tickIndex = tick.index;
-        //   }
-        // }
-        //
-        // if(tick.visibleLabel && this._label && isNull(this._label.value) && (this._label.position === 'all' || this._label.tickIndex === -1)) {
-        //   if(!isNull(this._label.position)) {
-        //     tick.label = this._label;
-        //     this._label.tickIndex = tick.index;
-        //     console.log('this._label', this._label)
-        //     console.log('tick.label', tick)
-        //   }
-        // }
 
         return tick;
       })

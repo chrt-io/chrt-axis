@@ -122,14 +122,14 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
           tick.position >= _margins.top && tick.position <= (height - _margins.bottom);
         // visible = visible && (this.showMinorTicks || (tick.isZero && this.showZero) || !tick.isMinor);
         visible = visible && (this.attr('showMinorTicks')() || !tick.isMinor);
-        visible = visible && ((!isLog) || (isLog && !tick.isMinor));
+        // visible = visible && ((!isLog) || (isLog && !tick.isMinor));
 
         tick.visible = visible;
         if(this.ticksFilter) {
           tick.visible = tick.visible && this.ticksFilter(tick.value, i, arr);
         }
 
-        tick.visibleLabel = visible;
+        tick.visibleLabel = visible && (this.attr('showMinorLabels')() || !tick.isMinor);
         if(this.labelsFilter) {
           tick.visibleLabel = tick.visibleLabel && this.labelsFilter(tick.value, i, arr);
         }

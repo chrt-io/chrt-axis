@@ -26,6 +26,8 @@ import {
   orient,
   format,
   minor,
+  minorTicks,
+  minorLabels,
   zero,
   // hideZero,
   label,
@@ -65,11 +67,8 @@ function chrtAxis(name) {
   this.attr('zero', null);
   this.ticksFilter = null;
   this.labelsFilter = null;
-  // this.tickPosition = TICK_POSITION;
-  // this.labelPosition = LABEL_POSITION;
-  // this.labelFormat = d => d;
+  this.attr('showMinorLabels', false);
   this.attr('showMinorTicks', false);
-  // this._label = null;
   this._ticks = [];
   this._fixedTicks = null;
 
@@ -129,6 +128,8 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   orient,
   format,
   minor,
+  minorTicks,
+  minorLabels,
   zero,
   // hideZero,
   label,

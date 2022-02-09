@@ -27,7 +27,7 @@ export default async function(container) {
     .data(data)
     .x({scale:'log'})
     .y({scale:'log'})
-    .add(xAxis())
-    .add(yAxis())
+    .add(xAxis().minorTicks().minorLabels(false))
+    .add(yAxis().minorTicks().minorLabels(false))
   return chart
 }
