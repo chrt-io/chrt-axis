@@ -25,7 +25,7 @@ export default async function(container) {
     .node(container)
     .size(600, 200)
     .data(data)
-    .x({domain:[0,10000], scale:'log'})
+    .x({domain:[1,10000], scale:'log'})
     .y({domain:[1,100000],scale:'log'})
     .add(xAxis(2))
     .add(yAxis(2))
