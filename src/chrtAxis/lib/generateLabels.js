@@ -17,14 +17,12 @@ export default function generateLabels(labels,name,callback) {
 
       const label = create('text')
       label.textContent = this.format()?.(d.value, i, arr);
-      label.setAttribute('fill', this.labelsColor()(d.value, i, arr))
-      // if(d.label) {
-      //   label.textContent = `${this.format()(d.value, i, arr)}${d.label.text}`;
-      // }
+      const color = this.labelsColor()(d.value,i,arr) ?? this.stroke()();
+      label.setAttribute('fill', color)
       labelGroup.appendChild(label);
     }
     if(callback) {
-      callback.call(null, labelGroup, d, i, arr);
+      callback(labelGroup, d, i, arr);
     }
   });
 }

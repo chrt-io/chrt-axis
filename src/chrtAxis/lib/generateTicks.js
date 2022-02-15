@@ -15,16 +15,14 @@ export default function generateTicks(ticks,name,callback) {
 
       this.g.appendChild(tickGroup);
 
-
       const tickLine = create('line');
-      tickLine.setAttribute('stroke', this.stroke()(tick,i,arr))
+      const color = this.ticksColor()(tick,i,arr) ?? this.stroke()();
+      tickLine.setAttribute('stroke', color)
       tickLine.setAttribute('stroke-width', this.strokeWidth()(tick,i,arr));
       tickGroup.appendChild(tickLine);
-
-
     }
     if(callback) {
-      callback.call(null, tickGroup, tick, i, arr);
+      callback(tickGroup, tick, i, arr);
     }
   });
 }

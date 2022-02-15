@@ -177,7 +177,7 @@ chrtAxisTitle.prototype = Object.assign(chrtAxisTitle.prototype, {
   offset,
 });
 
-export default chrtAxisTitle;
-// export default function () {
-//   return new chrtAxisTitle();
-// }
+// export default chrtAxisTitle;
+export default function () {
+  return new chrtAxisTitle();
+}

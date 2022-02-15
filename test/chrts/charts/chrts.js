@@ -27,9 +27,9 @@ export { default as linearAxesWithColumnsPadding } from './linear-x-axis-y-axis-
 export { default as chrtLine } from './x-ordinal-y-linear';
 export { default as yFixedLabels } from './y-fixed-labels';
 export { default as xFixedLabels } from './x-fixed-labels';
-export { default as xAxisRange } from './x-axis-range';
-export { default as yAxisRange } from './y-axis-range';
 export { default as labelsPadding } from './axis-labelPadding';
 export { default as labelsOffset } from './axis-labelOffset';
 export { default as linearXaxisLinearYaxisInvertedDomains } from './linear-x-axis-y-axis-inverted-domains';
 export { default as linearXaxisLinearYaxisInvertedRange } from './linear-x-axis-y-axis-inverted-range';
+export { default as customLabels } from './custom-labels.js';
+export { default as labelsTicksColorFromAxes } from './x-axis-y-axis-color-from-axis.js';

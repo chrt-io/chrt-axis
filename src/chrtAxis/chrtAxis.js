@@ -52,17 +52,17 @@ function chrtAxis(name) {
   this.name = name;
   this.attr('stroke', DEAULT_LINE_COLOR);
   this.attr('strokeWidth', DEFAULT_LINE_WIDTH);
-  this.attr('labelsColor', DEAULT_LINE_COLOR);
+  this.attr('labelsColor', null);
   this.attr('labelsOffset', [0, 0]);
   this.attr('labelsPadding', 0);
-  this.attr('ticksColor', DEAULT_LINE_COLOR);
+  this.attr('ticksColor', null);
   this.attr('ticksWidth', DEFAULT_LINE_WIDTH);
   this.attr('ticksLength', TICK_LENGTH);
   this.attr('ticksPosition', TICK_POSITION);
   this.attr('labelsPosition', LABEL_POSITION);
   this.attr('interval', null);
   this.attr('labelFormat', d => d);
-  this.tickTextColor = DEAULT_TICK_TEXT_COLOR;
+  // this.tickTextColor = DEAULT_TICK_TEXT_COLOR;
   this.attr('showAxisLine', true);
   this.attr('zero', null);
   this.ticksFilter = null;
@@ -131,7 +131,6 @@ chrtAxis.prototype = Object.assign(chrtAxis.prototype, {
   minorTicks,
   minorLabels,
   zero,
-  // hideZero,
   label,
   interval,
   title,
