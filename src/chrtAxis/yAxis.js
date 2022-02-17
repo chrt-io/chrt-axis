@@ -16,6 +16,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     x: 'x',
     y: 'y',
   }
+  // this.coord = coords.y;
 
   this.attr('orientation', DEFAULT_ORIENTATION[coords.y]);
   this._classNames = [...this._classNames,'chrt-y-axis'];
@@ -74,14 +75,14 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
     const orientation = this.attr('orientation')();
     const orientationDirection =
-      orientation === DEFAULT_ORIENTATION[this.name] ? 1 : -1;
+      orientation === DEFAULT_ORIENTATION[coords.y] ? 1 : -1;
 
     this.g.setAttribute('id', `${this.name}Axis-${this.id()}`);
     this.g.classList.remove(...this.g.classList)
     this.g.classList.add(...this._classNames);
 
     const axisX =
-      orientation === DEFAULT_ORIENTATION[this.name] ? _margins.left : width - _margins.right;
+      orientation === DEFAULT_ORIENTATION[coords.y] ? _margins.left : width - _margins.right;
     this.g.setAttribute('transform', `translate(${axisX},0)`);
 
     const _interval = this.attr('interval')();

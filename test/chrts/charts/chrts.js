@@ -33,3 +33,4 @@ export { default as linearXaxisLinearYaxisInvertedDomains } from './linear-x-axi
 export { default as linearXaxisLinearYaxisInvertedRange } from './linear-x-axis-y-axis-inverted-range';
 export { default as customLabels } from './custom-labels.js';
 export { default as labelsTicksColorFromAxes } from './x-axis-y-axis-color-from-axis.js';
+export { default as twoYAxisWith2Scales } from './x-linear-two-y-linear-scales.js';

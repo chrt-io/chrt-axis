@@ -54,7 +54,7 @@
     "chrt-object": "0.0.15"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.2",
+    "@babel/core": "^7.17.4",
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -64,7 +64,7 @@
     "babel-plugin-root-import": "^6.6.0",
     "babelify": "^10.0.0",
     "budo": "^11.6.4",
-    "chrt": "0.0.144",
+    "chrt": "0.0.145",
     "eslint": "^8.9.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",

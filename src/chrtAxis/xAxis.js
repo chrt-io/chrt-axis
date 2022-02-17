@@ -15,6 +15,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     x: 'x',
     y: 'y',
   }
+  // this.coord = coords.x;
 
   this.attr('orientation', DEFAULT_ORIENTATION[coords.x]);
   this._classNames = [...this._classNames,'chrt-x-axis'];
