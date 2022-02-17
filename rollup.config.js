@@ -16,7 +16,7 @@ const config = {
     indent: false,
     extend: true,
     exports: 'named',
-    banner: `// ${meta.homepage} v${
+    banner: `// ${meta.name} v${
       meta.version
     } Copyright ${new Date().getFullYear()} ${meta.author}`,
     globals: Object.assign(
