@@ -20,6 +20,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
   this.attr('orientation', DEFAULT_ORIENTATION[coords.y]);
   this._classNames = [...this._classNames,'chrt-y-axis'];
+  this._name = 'y';
 
   const yAxisTick = (tickGroup, visible, orientationDirection) => {
     tickGroup.style.display = visible ? 'block' : 'none';

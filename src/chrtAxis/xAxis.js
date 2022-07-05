@@ -19,6 +19,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
 
   this.attr('orientation', DEFAULT_ORIENTATION[coords.x]);
   this._classNames = [...this._classNames,'chrt-x-axis'];
+  this._name = 'x';
 
   const xAxisTick = (tickGroup, visible, orientationDirection) => {
     tickGroup.style.display = visible ? 'block' : 'none';

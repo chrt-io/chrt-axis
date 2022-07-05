@@ -115,7 +115,6 @@ function chrtAxisTitle(text) {
     }
 
     const offset = this.attr('offset')();
-
     this.text.textContent = text;
     this.text.setAttribute('text-anchor', textAnchor);
     this.text.setAttribute('x', x + offset.x);
@@ -178,6 +177,6 @@ chrtAxisTitle.prototype = Object.assign(chrtAxisTitle.prototype, {
 });
 
 // export default chrtAxisTitle;
-export default function () {
-  return new chrtAxisTitle();
+export default function (text) {
+  return new chrtAxisTitle(text);
 }

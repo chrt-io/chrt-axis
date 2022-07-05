@@ -35,3 +35,5 @@ export { default as customLabels } from './custom-labels.js';
 export { default as labelsTicksColorFromAxes } from './x-axis-y-axis-color-from-axis.js';
 export { default as twoYAxisWith2Scales } from './x-linear-two-y-linear-scales.js';
 export { default as xNamedYNamed } from './x-named-y-named.js';
+// AXIS TITLE
+export { default as xAxisTitleyAxisTitle } from './x-axis-title-y-axis-title';
