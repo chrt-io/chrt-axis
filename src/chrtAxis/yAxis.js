@@ -2,6 +2,7 @@ import generateTicks from './lib/generateTicks';
 import generateLabels from './lib/generateLabels';
 import chrtAxis from './chrtAxis';
 import { DEFAULT_ORIENTATION, TICKS_DEFAULT } from '../constants';
+import { ARIA_LABELS } from '../aria';
 import { utils, cssDisplay } from 'chrt-object';
 const { isNull, createSVG: create } = utils;
 
@@ -81,6 +82,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     this.g.setAttribute('id', `${this.name}Axis-${this.id()}`);
     this.g.classList.remove(...this.g.classList)
     this.g.classList.add(...this._classNames);
+    this.g.setAttribute('aria-label', this.ariaLabel ?? ARIA_LABELS[coords.y]);
 
     const axisX =
       orientation === DEFAULT_ORIENTATION[coords.y] ? _margins.left : width - _margins.right;
@@ -159,6 +161,9 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       axisTitleText.setAttribute('dx', labelPosition === 'outside' ? `${5 * orientationDirection}px` : `${-2 * orientationDirection}px`)
       axisTitleText.setAttribute('text-anchor', ~orientationDirection ? 'start' : 'end');
 
+      if(!this.ariaLabel) {
+        this.g.setAttribute('aria-describedby', axisTitleText.textContent);
+      }
 
       this.g.appendChild(axisTitleText);
     }

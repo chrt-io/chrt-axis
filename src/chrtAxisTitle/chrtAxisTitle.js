@@ -142,6 +142,7 @@ function chrtAxisTitle(text) {
     this.g.setAttribute('id', `${name}AxisTitle-${this.id()}`);
     this.g.classList.remove(...this.g.classList)
     this.g.classList.add(...this._classNames);
+    this.g.setAttribute('aria-label', this.ariaLabel ?? text);
 
     // if (scales && scales.x[this.parentNode.name]) {
     //   const _scale = scales.x[this.parentNode.name];
