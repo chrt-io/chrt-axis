@@ -104,10 +104,11 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
         : _margins.top;
     this.g.setAttribute('transform', `translate(0,${axisY})`);
 
-    let axisLine = this.g.querySelector(`line[data-id='tick-${this.name}-axis-line']`);
+    const dataID = escape(`tick-${this.name}-axis-line`);
+    let axisLine = this.g.querySelector(`line[data-id='${dataID}']`);
     if (!axisLine) {
       axisLine = create('line');
-      axisLine.setAttribute('data-id', `tick-${this.name}-axis-line`);
+      axisLine.setAttribute('data-id', dataID);
       this.g.appendChild(axisLine);
     }
 

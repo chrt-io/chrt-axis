@@ -3,12 +3,13 @@ const { createSVG: create } = utils;
 
 export default function generateLabels(labels,name,callback) {
   labels.forEach((d, i, arr) => {
+    const dataID = escape(`label-${name}-${d.value}`)
     let labelGroup = this.g.querySelector(
-      `[data-id='label-${name}-${d.value}']`
+      `[data-id='${dataID}']`
     );
     if (!labelGroup) {
       labelGroup = create('g');
-      labelGroup.setAttribute('data-id', `label-${name}-${d.value}`);
+      labelGroup.setAttribute('data-id', dataID);
       if(d.isMinor) {
         labelGroup.classList.add('label-minor');
       }

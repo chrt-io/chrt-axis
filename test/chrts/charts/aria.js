@@ -31,6 +31,6 @@ export default async function(container) {
             .color('#f00')
         )
     )
-  console.log(chart)
+  // console.log(chart)
   return chart
 }

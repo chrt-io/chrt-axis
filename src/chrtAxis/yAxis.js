@@ -113,10 +113,11 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       })
       .filter(d => d.visible || d.visibleLabel) // decrease the number of ticks rendered in the DOM
 
-    let axisLine = this.g.querySelector(`line[data-id='tick-${this.name}-axis-line']`);
+    const dataID = escape(`tick-${this.name}-axis-line`)
+    let axisLine = this.g.querySelector(`line[data-id='${dataID}']`);
     if (!axisLine) {
       axisLine = create('line');
-      axisLine.setAttribute('data-id', `tick-${this.name}-axis-line`);
+      axisLine.setAttribute('data-id', dataID);
       this.g.appendChild(axisLine);
     }
     const labelPosition = this.attr('labelsPosition')();

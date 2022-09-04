@@ -3,12 +3,13 @@ const { createSVG: create } = utils;
 
 export default function generateTicks(ticks,name,callback) {
   ticks.forEach((tick, i, arr) => {
+    const dataID = escape(`tick-${name}-${tick.value}`);
     let tickGroup = this.g.querySelector(
-      `[data-id='tick-${name}-${tick.value}']`
+      `[data-id='${dataID}']`
     );
     if (!tickGroup) {
       tickGroup = create('g');
-      tickGroup.setAttribute('data-id', `tick-${name}-${tick.value}`);
+      tickGroup.setAttribute('data-id', dataID);
       if(tick.isMinor) {
         tickGroup.classList.add('tick-minor');
       }
