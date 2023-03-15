@@ -7,7 +7,7 @@ import { utils, cssDisplay } from 'chrt-object';
 const { isNull, createSVG: create } = utils;
 
 function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
-  if(typeof arguments[0] === 'string') {
+  if (typeof arguments[0] === 'string') {
     customName = arguments[0];
     ticksNumber = TICKS_DEFAULT;
   }
@@ -19,7 +19,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
   // this.coord = coords.x;
 
   this.attr('orientation', DEFAULT_ORIENTATION[coords.x]);
-  this._classNames = [...this._classNames,'chrt-x-axis'];
+  this._classNames = [...this._classNames, 'chrt-x-axis'];
   this._name = 'x';
 
   const xAxisTick = (tickGroup, visible, orientationDirection) => {
@@ -28,7 +28,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     const tickLine = tickGroup.querySelector('line');
     const tickLength = this.attr('ticksLength')();
 
-    if(tickLine) {
+    if (tickLine) {
       tickLine.setAttribute('x1', 0);
       tickLine.setAttribute('x2', 0);
       tickLine.setAttribute('y1', 0);
@@ -36,7 +36,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       tickLine.setAttribute('stroke-width', this.ticksWidth()());
     }
     const label = tickGroup.querySelector('text');
-    if(label) {
+    if (label) {
       const labelPosition = this.attr('labelsPosition')();
       label.setAttribute('text-anchor', 'middle');
       label.setAttribute(
@@ -47,7 +47,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
         'data-orientation',
         orientationDirection
       );
-      if(orientationDirection > 0) {
+      if (orientationDirection > 0) {
         label.setAttribute('dy', `${labelPosition === 'outside' ? 1 : -0.25}em`);
       } else {
         label.setAttribute('dy', `${labelPosition === 'outside' ? -0.25 : 1}em`);
@@ -69,23 +69,23 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       orientation === DEFAULT_ORIENTATION[coords.x] ? 1 : -1;
 
     const ticks = scales[coords.x][this.name].ticks(this._fixedTicks || ticksNumber * 2, this.attr('interval')());
-    if(this._label && this._label.position === 'last') {
+    if (this._label && this._label.position === 'last') {
       ticks.reverse();
     }
 
     this._ticks = ticks
-      .map((tick, i , arr) => {
+      .map((tick, i, arr) => {
         tick.position = scales[coords.x][this.name](tick.value);
         let visible = tick.position >= _margins.left && tick.position <= width - _margins.right;
         visible = visible && (this.attr('showMinorTicks')() || !tick.isMinor);
 
         tick.visible = visible;
-        if(this.ticksFilter) {
+        if (this.ticksFilter) {
           tick.visible = tick.visible && this.ticksFilter(tick.value, i, arr);
         }
 
         tick.visibleLabel = visible && (this.attr('showMinorLabels')() || !tick.isMinor);
-        if(this.labelsFilter) {
+        if (this.labelsFilter) {
           tick.visibleLabel = tick.visibleLabel && this.labelsFilter(tick.value, i, arr);
         }
 
@@ -121,7 +121,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     const _zero = this.attr('zero')();
     const zero = isNull(_zero) ? scaleY.domain[0] : _zero;
     let axisLineY = scaleY.isLog() ? scaleY.range[1] : scaleY(zero) - (height - _margins.bottom);
-    if(scaleY.transformation === 'ordinal' &&
+    if (scaleY.transformation === 'ordinal' &&
       (isNull(_zero) || !~scaleY.domain.indexOf(zero))) {
       axisLineY = 0;
     }
@@ -134,9 +134,9 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     }
 
     const title = this.attr('title') ? this.attr('title')() : null;
-    if(!isNull(title)) {
+    if (!isNull(title)) {
       let axisTitleText = this.g.querySelector('text.title');
-      if(isNull(axisTitleText)) {
+      if (isNull(axisTitleText)) {
         axisTitleText = create('text');
         axisTitleText.classList.add('title');
       }
@@ -154,7 +154,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
         'text-anchor', 'end'
       );
 
-      if(!this.ariaLabel) {
+      if (!this.ariaLabel) {
         this.g.setAttribute('aria-describedby', axisTitleText.textContent);
       }
 
@@ -166,7 +166,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
 
       const tick = this._ticks.find(tick => tickName === `tick-${this.name}-${tick}`);
 
-      if(!tick) {
+      if (!tick) {
         d.remove();
       }
     })
@@ -191,6 +191,6 @@ xAxis.prototype = Object.create(chrtAxis.prototype);
 xAxis.prototype.constructor = xAxis;
 xAxis.parent = chrtAxis.prototype;
 
-export default function(ticksNumber, customName) {
+export default function (ticksNumber, customName) {
   return new xAxis(ticksNumber, customName);
 }
