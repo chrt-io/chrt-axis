@@ -7,7 +7,7 @@ import { utils, cssDisplay } from 'chrt-object';
 const { isNull, createSVG: create } = utils;
 
 function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
-  if(typeof arguments[0] === 'string') {
+  if (typeof arguments[0] === 'string') {
     customName = arguments[0];
     ticksNumber = TICKS_DEFAULT;
   }
@@ -20,7 +20,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
   // this.coord = coords.y;
 
   this.attr('orientation', DEFAULT_ORIENTATION[coords.y]);
-  this._classNames = [...this._classNames,'chrt-y-axis'];
+  this._classNames = [...this._classNames, 'chrt-y-axis'];
   this._name = 'y';
 
   const yAxisTick = (tickGroup, visible, orientationDirection) => {
@@ -28,7 +28,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
     const tickLength = this.attr('ticksLength')();
     const tickLine = tickGroup.querySelector('line');
-    if(tickLine) {
+    if (tickLine) {
 
       tickLine.setAttribute('x1', 0);
       tickLine.setAttribute(
@@ -40,7 +40,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     const labelPosition = this.attr('labelsPosition')();
 
     const label = tickGroup.querySelector('text');
-    if(label) {
+    if (label) {
       label.setAttribute(
         'text-anchor',
         labelPosition === 'outside'
@@ -48,8 +48,8 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
             ? 'end'
             : 'start'
           : ~orientationDirection
-          ? 'start'
-          : 'end'
+            ? 'start'
+            : 'end'
       );
       label.setAttribute(
         'x',
@@ -90,30 +90,30 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
     const _interval = this.attr('interval')();
     const ticks = scales[coords.y][this.name].ticks(this._fixedTicks || ticksNumber * 2, _interval);
-    if(this._label && this._label.position === 'last') {
+    if (this._label && this._label.position === 'last') {
       ticks.reverse();
     }
     this._ticks = ticks
-      .map((tick, i , arr) => {
+      .map((tick, i, arr) => {
         tick.position = scales[coords.y][this.name](tick.value);
         let visible =
           tick.position >= _margins.top && tick.position <= (height - _margins.bottom);
         visible = visible && (this.attr('showMinorTicks')() || !tick.isMinor);
 
         tick.visible = visible;
-        if(this.ticksFilter) {
+        if (this.ticksFilter) {
           tick.visible = tick.visible && this.ticksFilter(tick.value, i, arr);
         }
 
         tick.visibleLabel = visible && (this.attr('showMinorLabels')() || !tick.isMinor);
-        if(this.labelsFilter) {
+        if (this.labelsFilter) {
           tick.visibleLabel = tick.visibleLabel && this.labelsFilter(tick.value, i, arr);
         }
         return tick;
       })
       .filter(d => d.visible || d.visibleLabel) // decrease the number of ticks rendered in the DOM
 
-    const dataID = escape(`tick-${this.name}-axis-line`)
+    const dataID = encodeURIComponent(`tick-${this.name}-axis-line`)
     let axisLine = this.g.querySelector(`line[data-id='${dataID}']`);
     if (!axisLine) {
       axisLine = create('line');
@@ -131,7 +131,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     const zero = isNull(_zero) ? scaleX.domain[0] : _zero;
 
     let axisLineX = isNull(_zero) ? scaleX.range[0] : scaleX(zero) - _margins.left;
-    if(scaleX.transformation === 'ordinal' &&
+    if (scaleX.transformation === 'ordinal' &&
       (isNull(_zero) || !~scaleX.domain.indexOf(zero))) {
       axisLineX = 0;
     }
@@ -147,9 +147,9 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     }
 
     const title = this.attr('title') ? this.attr('title')() : null;
-    if(!isNull(title)) {
+    if (!isNull(title)) {
       let axisTitleText = this.g.querySelector('text.title');
-      if(isNull(axisTitleText)) {
+      if (isNull(axisTitleText)) {
         axisTitleText = create('text');
         axisTitleText.classList.add('title');
       }
@@ -162,7 +162,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       axisTitleText.setAttribute('dx', labelPosition === 'outside' ? `${5 * orientationDirection}px` : `${-2 * orientationDirection}px`)
       axisTitleText.setAttribute('text-anchor', ~orientationDirection ? 'start' : 'end');
 
-      if(!this.ariaLabel) {
+      if (!this.ariaLabel) {
         this.g.setAttribute('aria-describedby', axisTitleText.textContent);
       }
 
@@ -174,7 +174,7 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
 
       const tick = this._ticks.find(tick => tickName === `tick-${name}-${tick}`);
 
-      if(!tick) {
+      if (!tick) {
         d.remove();
       }
     })

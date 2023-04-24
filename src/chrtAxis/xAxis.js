@@ -104,7 +104,7 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
         : _margins.top;
     this.g.setAttribute('transform', `translate(0,${axisY})`);
 
-    const dataID = escape(`tick-${this.name}-axis-line`);
+    const dataID = encodeURIComponent(`tick-${this.name}-axis-line`);
     let axisLine = this.g.querySelector(`line[data-id='${dataID}']`);
     if (!axisLine) {
       axisLine = create('line');
@@ -191,6 +191,6 @@ xAxis.prototype = Object.create(chrtAxis.prototype);
 xAxis.prototype.constructor = xAxis;
 xAxis.parent = chrtAxis.prototype;
 
-export default function (ticksNumber, customName) {
+export default function(ticksNumber, customName) {
   return new xAxis(ticksNumber, customName);
 }

@@ -1,6 +1,6 @@
+import babel from '@rollup/plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import * as meta from './package.json';
 
@@ -16,9 +16,8 @@ const config = {
     indent: false,
     extend: true,
     exports: 'named',
-    banner: `// ${meta.name} v${
-      meta.version
-    } Copyright ${new Date().getFullYear()} ${meta.author}`,
+    banner: `// ${meta.name} v${meta.version
+      } Copyright ${new Date().getFullYear()} ${meta.author}`,
     globals: Object.assign(
       {},
       ...Object.keys(meta.dependencies || {})
