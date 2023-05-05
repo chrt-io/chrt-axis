@@ -198,7 +198,8 @@ xAxis.zero(100);
 ### Ticks
 #### `xAxis.ticks([count])`
 If `count` is specified, it suggests the count for the number of ticks the Axis accordingly. If `count` is `null`, this function will return the list of the ticks the Axis. If `count` is a `Number` or a `function`, `ticks` will define a suggested count for the number of ticks in the Axis that will be calculated by the axis scale.
-```
+
+```js
 Chrt()
     .add(
         xAxis()
@@ -279,7 +280,7 @@ axis.showTicks((d, i) => i % 2 === 0);
 ```
 
 Show all ticks:
-```
+```js
 axis.showTicks(true);
 ```
 
