@@ -158,9 +158,6 @@ Chrt()
     )
 ```
 
-#### `xAxis.orient()`
-Sure, here are the API specs for `xAxis.orient()`:
-
 ### `xAxis.orient([orientation])`
 Sets the orientation of the X axis. If no argument is passed, the current orientation is returned.
 
@@ -272,7 +269,7 @@ Chrt()
 
 #### `xAxis.filter([filter])`
 #### `xAxis.showTicks([filter])`
-This function shows or hides the ticks on the axis based on the parameter passed. The parameter can be a function, a boolean value, a number, or an array of values. When a function is passed, it is used to filter the ticks based on their data and index. When a boolean value is passed, all ticks are either shown or hidden. When a number is passed, only the tick with the corresponding value is shown. When an array of values is passed, only the ticks with values in the array are shown.
+Shows or hides the ticks on the axis based on the parameter passed. The parameter can be a function, a boolean value, a number, or an array of values. When a function is passed, it is used to filter the ticks based on their data and index. When a boolean value is passed, all ticks are either shown or hidden. When a number is passed, only the tick with the corresponding value is shown. When an array of values is passed, only the ticks with values in the array are shown.
 
 Example usage:  
 
@@ -302,7 +299,7 @@ xAxis().showTicks([10, 20, 30]);
 ```
 
 #### `xAxis.hideTicks()`
-`hideTicks(filter)`: This function hides the ticks on the axis based on the parameter passed. It is essentially the opposite of the `showTicks()` function. The parameter can be a function, a boolean value, a number, or an array of values. When a function is passed, it is used to filter the ticks based on their data and index. When a boolean value is passed, all ticks are either shown or hidden. When a number is passed, only the tick with the corresponding value is shown. When an array of values is passed, only the ticks with values in the array are shown.
+Hides the ticks on the axis based on the parameter passed. It is essentially the opposite of the `showTicks()` function. The parameter can be a function, a boolean value, a number, or an array of values. When a function is passed, it is used to filter the ticks based on their data and index. When a boolean value is passed, all ticks are either shown or hidden. When a number is passed, only the tick with the corresponding value is shown. When an array of values is passed, only the ticks with values in the array are shown.
 
 Example usage:
 
@@ -332,7 +329,7 @@ xAxis.hideTicks([10, 20, 30]);
 ```
 
 #### `xAxis.firstTick([show])`
-This function shows or hides the first tick on the axis. If `show` is `true`, only the first tick is shown and all other ticks are hidden. If `show` is `false`, only the first tick is hidden and all other ticks are shown.
+Shows or hides the first tick on the axis. If `show` is `true`, only the first tick is shown and all other ticks are hidden. If `show` is `false`, only the first tick is hidden and all other ticks are shown.
 
 Example usage:
 
@@ -387,6 +384,12 @@ xAxis.firstAndLastTicks(false);
 #### `xAxis.firstAndLastLabels`
 #### `xAxis.labelsColor`
 #### `xAxis.labelOffset`
+Sets the offset of the labels along the direction of the x-axis. A positive offset moves the labels to the right, while a negative offset moves the labels to the left. A value of 0 means no offset, and the label will be aligned with its position. If a function is provided as the offset parameter, it will be called for each label with the `value` and `index` of the label as parameters.
+
+Example usage:
+```js
+
+```
 
 ### yAxis
 Y Axis (`yAxis`) runs vertically and it can be oriented at the left or right of the chart.
