@@ -176,8 +176,8 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
     });
 
     const labelsPadding = this.attr('labelsPadding')() * orientationDirection;
-    generateLabels.call(this, this._ticks, this.name, (tickGroup, tick) => {
-      tickGroup.setAttribute('transform', `translate(${tick.position + this.attr('labelsOffset')()[0]}, ${this.attr('labelsOffset')()[1] + labelsPadding})`);
+    generateLabels.call(this, this._ticks, this.name, (tickGroup, tick, i) => {
+      tickGroup.setAttribute('transform', `translate(${tick.position + this.attr('labelsOffset')(tick,i)[0]}, ${this.attr('labelsOffset')(tick,i)[1] + labelsPadding})`);
       xAxisTick(tickGroup, tick.visibleLabel, orientationDirection);
     });
 

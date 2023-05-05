@@ -27,7 +27,8 @@ export default async function(container) {
     .add(
       xAxis()
         .orient('top')
-        .labelsPadding(10)
+        // .labelsPadding(10)
+        .labelsOffset((d,i) => [i,i])
     )
   return chart
 }
