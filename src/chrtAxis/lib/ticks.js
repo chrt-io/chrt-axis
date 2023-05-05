@@ -59,7 +59,6 @@ export function hideTicks(filter) {
 }
 
 export function firstTick(show = true) {
-  // // console.log('FIRST TICK', this, show)
   if(show) {
     showTicks.call(this, (d,i) => i === 0);
   } else {
