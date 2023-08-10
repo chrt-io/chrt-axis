@@ -1,8 +1,8 @@
 import babel from '@rollup/plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import * as meta from './package.json';
+import terser from '@rollup/plugin-terser';
+import meta from './package.json' assert { type: 'json'};
 
 const config = {
   input: 'src/index.js',
