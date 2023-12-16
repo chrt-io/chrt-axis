@@ -1,5 +1,5 @@
-import { utils } from 'chrt-object';
+import { utils } from "chrt-object";
 
 export default function orient(value) {
-  return this.attr('orientation', value)
+  return this.attr("orientation", value);
 }
