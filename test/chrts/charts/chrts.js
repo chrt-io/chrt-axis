@@ -39,3 +39,5 @@ export { default as xNamedYNamed } from './x-named-y-named.js';
 export { default as xAxisTitleyAxisTitle } from './x-axis-title-y-axis-title';
 // ARIA
 export { default as aria } from './aria';
+// AXIS LABELS ON MULTIPLE LINES
+export { default as labelsOnMultipleLines } from './labels-on-multiple-lines';

@@ -156,9 +156,8 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
       }
       axisTitleText.textContent = title;
       let x =
-        (labelPosition === 'outside' ? this.tickLength : 0) *
+        (labelPosition === 'outside' ? this.tickLength()() : 0) *
         orientationDirection;
-
       axisTitleText.setAttribute('x', x);
       axisTitleText.setAttribute('y', _margins.top);
       axisTitleText.setAttribute(
@@ -201,27 +200,43 @@ function yAxis(ticksNumber = TICKS_DEFAULT, customName = 'y') {
     const labelsPadding = this.attr('labelsPadding')();
 
     let compositePosition = 'left';
-
+    let labelWidth = 100;
     if (orientationDirection > 0) {
       compositePosition = labelPosition === 'outside' ? 'left' : 'right';
+      labelWidth = compositePosition === 'left' ? _margins.left : width / 2;
     } else {
       compositePosition = labelPosition === 'outside' ? 'right' : 'left';
+      labelWidth = compositePosition === 'right' ? _margins.right : width / 2;
     }
+    labelWidth = labelWidth - labelsPadding - this.attr('ticksLength')();
     generateLabels.call(
       this,
       this._ticks,
       this.name,
       {
         align: 'left',
+        getTickDistance: (tick, i) => {
+          return labelWidth;
+        },
       },
       (labelGroup, tick) => {
-        labelGroup.setAttribute(
-          'transform',
-          `translate(${
+        // labelGroup.setAttribute(
+        //   'transform',
+        //   `translate(${
+        //     this.attr('labelsOffset')()[0] +
+        //     labelsPadding * (compositePosition === 'left' ? -1 : 1)
+        //   }, ${tick.position + this.attr('labelsOffset')()[1]})`,
+        // );
+        labelGroup
+          .querySelector('foreignObject')
+          .setAttribute(
+            'x',
             this.attr('labelsOffset')()[0] +
-            labelsPadding * (compositePosition === 'left' ? -1 : 1)
-          }, ${tick.position + this.attr('labelsOffset')()[1]})`,
-        );
+              labelsPadding * (compositePosition === 'left' ? -1 : 1),
+          );
+        labelGroup
+          .querySelector('foreignObject')
+          .setAttribute('y', tick.position + this.attr('labelsOffset')()[1]);
         yAxisLabel(labelGroup, tick.visibleLabel, compositePosition);
       },
     );

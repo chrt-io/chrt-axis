@@ -208,18 +208,36 @@ function xAxis(ticksNumber = TICKS_DEFAULT, customName = 'x') {
       this,
       this._ticks,
       this.name,
-      {},
-      (labelsGroup, tick, i) => {
-        labelsGroup.setAttribute(
-          'transform',
-          `translate(${
-            tick.position + this.attr('labelsOffset')(tick, i)[0]
-          }, ${
+      {
+        getTickDistance: (tick, i) => {
+          const nextTick = this._ticks?.[i + 1] || this._ticks?.[i - 1];
+          return nextTick ? Math.abs(nextTick.position - tick.position) : 0;
+        },
+      },
+      (labelGroup, tick, i) => {
+        // labelGroup.setAttribute(
+        //   'transform',
+        //   `translate(${
+        //     tick.position + this.attr('labelsOffset')(tick, i)[0]
+        //   }, ${
+        //     this.attr('labelsOffset')(tick, i)[1] +
+        //     labelsPadding * (compositePosition === 'below' ? 1 : -1)
+        //   })`,
+        // );
+        labelGroup
+          .querySelector('foreignObject')
+          .setAttribute(
+            'x',
+            tick.position + this.attr('labelsOffset')(tick, i)[0],
+          );
+        labelGroup
+          .querySelector('foreignObject')
+          .setAttribute(
+            'y',
             this.attr('labelsOffset')(tick, i)[1] +
-            labelsPadding * (compositePosition === 'below' ? 1 : -1)
-          })`,
-        );
-        xAxisLabel(labelsGroup, tick.visibleLabel, compositePosition);
+              labelsPadding * (compositePosition === 'below' ? 1 : -1),
+          );
+        xAxisLabel(labelGroup, tick.visibleLabel, compositePosition);
       },
     );
 

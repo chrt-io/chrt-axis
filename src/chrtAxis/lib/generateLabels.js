@@ -13,11 +13,14 @@ function createSVGWithWrappedText(textContent, maxWidth, options) {
 
   // Create the XHTML div element
   const div = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-  div.style.wordWrap = 'break-word';
+  div.style.wordWrap =
+    typeof textContent === 'number' ? 'no-wrap' : 'break-word';
   div.style.maxWidth = `${maxWidth}px`;
+  div.style.width = `${maxWidth}px`;
+  div.style.padding = `0 0.5em`;
   div.style.textAlign = options.align ?? 'center';
   // div.style.transform = "translateX(-50%)";
-  div.textContent = textContent;
+  div.innerHTML = textContent;
 
   // Append elements to build the hierarchy
   foreignObject.appendChild(div);
@@ -40,7 +43,7 @@ export default function generateLabels(labels, name, options = {}, callback) {
 
       const label = createSVGWithWrappedText(
         this.format()?.(d.value, i, arr),
-        100,
+        options.getTickDistance ? options.getTickDistance(d, i) : 100,
         options,
       );
       labelGroup.appendChild(label);
