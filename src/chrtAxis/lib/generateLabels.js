@@ -20,7 +20,8 @@ function createSVGWithWrappedText(textContent, maxWidth, options) {
   div.style.padding = `0 0.5em`;
   div.style.textAlign = options.align ?? 'center';
   // div.style.transform = "translateX(-50%)";
-  div.innerHTML = textContent;
+  div.textContent = textContent;
+  div.innerText = textContent;
 
   // Append elements to build the hierarchy
   foreignObject.appendChild(div);

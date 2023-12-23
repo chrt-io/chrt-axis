@@ -15,8 +15,8 @@ const data = [
     y: 'this is label Z, and it should be on three lines',
   },
   {
-    x: 'this is label D on multiple lines, and it is very long',
-    y: 'this is<br/>label W',
+    x: 'this is label D \r\n \r\n multiple lines, and it is very long',
+    y: 'this is\nlabel W',
   },
 ];
 
