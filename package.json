@@ -2,12 +2,7 @@
   "name": "chrt-axis",
   "version": "0.0.59",
   "description": "Axis component for Chrt",
-  "keywords": [
-    "chrt",
-    "charts",
-    "axis",
-    "visualization"
-  ],
+  "keywords": ["chrt", "charts", "axis", "visualization"],
   "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -19,9 +14,7 @@
   },
   "watch": {
     "build": {
-      "patterns": [
-        "src"
-      ],
+      "patterns": ["src"],
       "extensions": "js,jsx"
     }
   },
@@ -77,8 +70,8 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "watch": "^1.0.2"
   },
-  "files": [
-    "dist/**/*.js",
-    "src/**/*.js"
-  ]
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.9"
+  },
+  "files": ["dist/**/*.js", "src/**/*.js"]
 }
