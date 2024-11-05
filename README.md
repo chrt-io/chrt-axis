@@ -228,8 +228,6 @@ If `count` is specified, it suggests the count for the number of ticks the Axis 
 Chrt().add(xAxis().ticks(10));
 ```
 
-Sure! Here are the API specs for `ticksColor` and `ticksWidth`:
-
 #### `ticksColor([color])`
 
 Sets the color of the ticks to the specified `color` value, or returns the current tick color if `color` is not provided.
