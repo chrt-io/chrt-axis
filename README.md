@@ -1,9 +1,11 @@
 # chrt-axis
+
 Component for the creation of Axes in chrt. The axes define the area where the values are displayed and they help the reader to make sense of the position of the elements in the chart. Axes are based on scales (quantitative and categorical).
 
 The component provides two types of axes: the X Axis (`xAxis`) which runs horizontally and the Y Axis (`yAxis`), which runs vertically.
 
 A chrtAxis is formed by a set of visual elements:
+
 - One axis line
 - Ticks
 - Labels
@@ -13,12 +15,15 @@ A chrtAxis is formed by a set of visual elements:
 One chart can have multiple Axes, and they can be oriented (left/right and top/bottom).
 
 ## Installing
+
 For use with Webpack, Rollup, or other Node-based bundlers, `chrt-axis` can be installed as a standalone module via a package manager such as Yarn or npm.
+
 ```bash
 npm install chrt-axis chrt-core
 ```
 
 `chrt-axis` can be used as part of the `chrt` package:
+
 ```bash
 npm install chrt
 ```
@@ -28,137 +33,113 @@ npm install chrt
 ## Usage
 
 ### ES6 / Bundlers (Webpack, Rollup, etc.)
-```js
-import Chrt from 'chrt-core';
-import { xAxis, yAxis } from 'chrt-axis';
 
-Chrt()
-    .data([1,2,3,4,5,6])
-    .add(
-        xAxis()
-    )
-    .add(
-        yAxis()
-    )
+```js
+import Chrt from "chrt-core";
+import { xAxis, yAxis } from "chrt-axis";
+
+Chrt().data([1, 2, 3, 4, 5, 6]).add(xAxis()).add(yAxis());
 ```
 
 ### Vanilla HTML
+
 In vanilla HTML, `chrt-axis` can be imported as an ES module, (i.e. from Skypack):
 
 ```html
 <div id="chart"></div>
 
 <script type="module">
+  import Chrt from "https://cdn.skypack.dev/chrt-core";
+  import { xAxis, yAxis } from "https://cdn.skypack.dev/chrt-axis";
 
-import Chrt from 'https://cdn.skypack.dev/chrt-core';
-import {xAxis, yAxis} from 'https://cdn.skypack.dev/chrt-axis';
+  const chart = Chrt().data([1, 2, 3, 4, 5, 6]).add(xAxis()).add(yAxis());
 
-const chart = Chrt()
-  .data([1,2,3,4,5,6])
-  .add(xAxis())
-  .add(yAxis())
-
-document
-    .querySelector('#chart')
-    .appendChild(chart.node())
-
+  document.querySelector("#chart").appendChild(chart.node());
 </script>
 ```
 
 ### Script Tag
+
 For legacy environments, you can load the `chrt` UMD bundle from an npm-based CDN such as [jsdelivr](https://www.jsdelivr.com/package/npm/chrt):
+
 ```html
 <div id="chart"></div>
 <script src="https://cdn.jsdelivr.net/npm/chrt@latest/dist/chrt.min.js"></script>
 <script>
-
-    chrt.Chrt()
-        .node(document.getElementById('chart'))
-        .data([0,1,2,3,4,5])
-        .add(
-            chrt.xAxis()
-        )
-        .add(
-            chrt.yAxis()
-        )
+  chrt
+    .Chrt()
+    .node(document.getElementById("chart"))
+    .data([0, 1, 2, 3, 4, 5])
+    .add(chrt.xAxis())
+    .add(chrt.yAxis());
 </script>
 ```
 
 ## API Reference
-* [xAxis](#xaxis)
-* [yAxis](#yaxis)
-* [chrtAxisRange](#chrtaxisrange)
-* [chrtAxisTitle](#chrtaxistitle)
+
+- [xAxis](#xaxis)
+- [yAxis](#yaxis)
+- [chrtAxisRange](#chrtaxisrange)
+- [chrtAxisTitle](#chrtaxistitle)
 
 ### xAxis
+
 X Axis (`xAxis`) runs horizontally and it can be oriented at the bottom or top of the chart.
 
 #### `xAxis([tickCount[, scaleName]])`
+
 When `xAxis` is added without arguments, `chrt` builds a default axis with a computed number of ticks based on the x scale. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis()
-    )
+Chrt().add(xAxis());
 ```
 
 When `xAxis` is added with `count`, `chrt` builds a default axis with a suggested number of ticks based on the x scale. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis(5)
-    )
+Chrt().add(xAxis(5));
 ```
 
 When `xAxis` is added with a `scaleName`, `chrt` builds an axis by computing the ticks based on the custom scale called `scaleName`. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis(10, 'customScaleName')
-    )
+Chrt().add(xAxis(10, "customScaleName"));
 ```
 
 #### `xAxis.width([widthValue])`
+
 If `widthValue` is specified, it sets the thickness of the Axis line accordingly. If `widthValue` is `null`, this function will return the thickness of the line of the Axis. If `widthValue` is a `Number` or a `function`, `width` will set the thickness of the line of the Axis. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .width(2)
-    )
+Chrt().add(xAxis().width(2));
 ```
 
 #### `xAxis.color([colorValue])`
+
 If `colorValue` is specified, it sets the color of the Axis line accordingly. If `colorValue` is `null`, this function will return the color of the line of the Axis. If `colorValue` is a `String` or a `function`, `color` will set the color of the line of the Axis. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .color('#f00')
-    )
+Chrt().add(xAxis().color("#f00"));
 ```
 
 #### `xAxis.showAxis([show])`
+
 If `show` is specified, it sets visibility the Axis accordingly. If `show` is `null`, this function will return the current visibility of the Axis. If `show` is a `Boolean` or a `function`, `showAxis` will define whether the Axis is visible or not. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .showAxis(false)
-    )
+Chrt().add(xAxis().showAxis(false));
 ```
 
 #### `xAxis.hideAxis()`
+
 Shortcut for `showAxis(false)`, when called on the Axis it will hide the axis. Example usage:
+
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .hideAxis()
-    )
+Chrt().add(xAxis().hideAxis());
 ```
 
-### `xAxis.orient([orientation])`
+#### `xAxis.orient([orientation])`
+
 Sets the orientation of the X axis. If no argument is passed, the current orientation is returned.
 
 ```js
@@ -171,14 +152,43 @@ console.log(currentOrientation); // Output: "top"
 ```
 
 Note: The `yAxis` object also has an `orient()` method with similar usage.
-#### `xAxis.format()`
- Sets the formatting function for the labels in the x-axis. The function takes one argument, the value of the tick, and returns the formatted string for that value.
 
- ```js
- xAxis.format(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format);
- ```
-#### `xAxis.minor()`
+#### `xAxis.format()`
+
+Sets the formatting function for the labels in the x-axis. The function takes one argument, the value of the tick, and returns the formatted string for that value.
+
+```js
+xAxis.format(
+  new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format,
+);
+```
+
+#### `.minor([show])`
+
+Enables or disables minor ticks.
+
+```javascript
+xAxis.minor(true);
+```
+
+#### `.minorTicks([count])`
+
+Defines the number of minor ticks between each major tick.
+
+```javascript
+yAxis.minorTicks(3);
+```
+
+#### `.minorLabels([show])`
+
+Enables or disables labels for minor ticks.
+
+```javascript
+xAxis.minorLabels(false);
+```
+
 #### `xAxis.zero()`
+
 Sets the vertical position of the x-axis line relative to the origin of the chart. By default, the x-axis line is positioned at the value 0 on the y-axis.
 `value` is the value representing the y-coordinate of the x-axis line. If not provided, the line will be positioned at the y-coordinate of the minimum value of the y-axis scale.
 
@@ -190,21 +200,32 @@ Suppose you have a chart that displays the number of sales of a product over tim
 xAxis.zero(100);
 ```
 
-#### `xAxis.hideZero()`
-#### `xAxis.label()`
+#### `.label([text])`
+
+Sets or gets the label for the axis.
+
+```javascript
+xAxis.label("X Axis Label");
+```
+
 #### `xAxis.interval()`
-#### `xAxis.title()`
+
+#### `xAxis.title([titleText])`
+
+Sets or gets the title for the axis.
+
+```javascript
+xAxis.title("Main X Axis");
+```
 
 ### Ticks
+
 #### `xAxis.ticks([count])`
+
 If `count` is specified, it suggests the count for the number of ticks the Axis accordingly. If `count` is `null`, this function will return the list of the ticks the Axis. If `count` is a `Number` or a `function`, `ticks` will define a suggested count for the number of ticks in the Axis that will be calculated by the axis scale.
 
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .ticks(10)
-    )
+Chrt().add(xAxis().ticks(10));
 ```
 
 Sure! Here are the API specs for `ticksColor` and `ticksWidth`:
@@ -217,9 +238,9 @@ Sets the color of the ticks to the specified `color` value, or returns the curre
 // Set the color of ticks using a function
 xAxis.ticksColor((d, i) => {
   if (i % 2 === 0) {
-    return 'red';
+    return "red";
   } else {
-    return 'blue';
+    return "blue";
   }
 });
 
@@ -246,100 +267,109 @@ const currentWidth = xAxis.ticksWidth();
 ```
 
 #### `xAxis.setTickLength([tickLength])`
+
 If `tickLength` is specified, it sets the length of the ticks of the Axis accordingly. If `tickLength` is `null`, this function will return the length of the ticks of the Axis. If `tickLength` is a `Number` or a `function`, `setTickLength` will set the length of the ticks of the Axis. Example usage:
 
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .setTickLength(5)
-    )
+Chrt().add(xAxis().setTickLength(5));
 ```
 
 #### `xAxis.setTickPosition([tickPosition])`
+
 If `tickPosition` is specified, it sets the position of the ticks of the Axis accordingly. If `tickPosition` is `null`, this function will return the current position of the ticks of the Axis. If `tickPosition` is a `String` or a `function`, `setTickPosition` will set the length of the ticks of the Axis. The accepted values of `tickPosition` are `inside` and `outside` (default position). Example usage:
 
 ```js
-Chrt()
-    .add(
-        xAxis()
-            .setTickPosition('inside')
-            .setTickPosition('outside')
-    )
+Chrt().add(xAxis().setTickPosition("inside").setTickPosition("outside"));
 ```
 
 #### `xAxis.filter([filter])`
+
 #### `xAxis.showTicks([filter])`
+
 Shows or hides the ticks on the axis based on the parameter passed. The parameter can be a function, a boolean value, a number, or an array of values. When a function is passed, it is used to filter the ticks based on their data and index. When a boolean value is passed, all ticks are either shown or hidden. When a number is passed, only the tick with the corresponding value is shown. When an array of values is passed, only the ticks with values in the array are shown.
 
-Example usage:  
+Example usage:
 
-Show every other tick:  
+Show every other tick:
+
 ```js
 axis.showTicks((d, i) => i % 2 === 0);
 ```
 
 Show all ticks:
+
 ```js
 axis.showTicks(true);
 ```
 
 Hide all ticks:
+
 ```js
 axis.showTicks(false);
 ```
 
 Show only the tick with value 10:
+
 ```js
 xAxis().showTicks(10);
 ```
 
 Show only ticks with values 10, 20, and 30:
+
 ```js
 xAxis().showTicks([10, 20, 30]);
 ```
 
 #### `xAxis.hideTicks()`
+
 Hides the ticks on the axis based on the parameter passed. It is essentially the opposite of the `showTicks()` function. The parameter can be a function, a boolean value, a number, or an array of values. When a function is passed, it is used to filter the ticks based on their data and index. When a boolean value is passed, all ticks are either shown or hidden. When a number is passed, only the tick with the corresponding value is shown. When an array of values is passed, only the ticks with values in the array are shown.
 
 Example usage:
 
 Hide every other tick:
+
 ```js
 xAxis.hideTicks((d, i) => i % 2 === 0);
 ```
 
 Hide all ticks:
+
 ```js
 xAxis.hideTicks(true);
 ```
 
 Show all ticks:
+
 ```js
 xAxis.hideTicks(false);
 ```
 
 Hide only the tick with value 10:
+
 ```js
 xAxis.hideTicks(10);
 ```
 
 Hide ticks with values 10, 20, and 30:
+
 ```js
 xAxis.hideTicks([10, 20, 30]);
 ```
 
 #### `xAxis.firstTick([show])`
+
 Shows or hides the first tick on the axis. If `show` is `true`, only the first tick is shown and all other ticks are hidden. If `show` is `false`, only the first tick is hidden and all other ticks are shown.
 
 Example usage:
 
 Show the first tick:
+
 ```js
 xAxis.firstTick();
 ```
 
 Hide the first tick:
+
 ```js
 xAxis.firstTick(false);
 ```
@@ -347,52 +377,143 @@ xAxis.firstTick(false);
 Note that if you want to customize the appearance of the first tick (e.g., make it a different color or size), you can use the `ticksColor()`, `ticksLength()` and `ticksWidth()` functions to apply a different style to the first tick.
 
 #### `xAxis.lastTick([show])`
+
 Shows or hides the last tick on the axis. If `show` is `true`, only the last tick is shown and all other ticks are hidden. If `show` is `false`, only the last tick is hidden and all other ticks are shown.
 
 Example usage:
 
 Show the last tick:
+
 ```js
 xAxis.lastTick();
 ```
 
 Hide the last tick:
+
 ```js
 xAxis.lastTick(false);
 ```
 
 #### `xAxis.firstAndLastTicks()`
+
 Shows or hides both the first and the last ticks on the axis. If `show` is `true`, only the first and last ticks are shown and all other ticks are hidden. If `show` is `false`, only the first and last ticks are hidden and all other ticks are shown.
 
 Example usage:
 
 Show the first and last ticks:
+
 ```js
 xAxis.firstAndLastTicks();
 ```
 
 Hide the first and last ticks:
+
 ```js
 xAxis.firstAndLastTicks(false);
 ```
 
+#### `.minor([show])`
+
+Enables or disables minor ticks.
+
+```javascript
+xAxis.minor(true);
+```
+
+#### `xAxis.minorTicks([count])`
+
+Defines the number of minor ticks between each major tick.
+
+```javascript
+yAxis.minorTicks(3);
+```
+
 ### Labels
+
 #### `xAxis.labels([count])`
+
 #### `xAxis.showLabels`
+
+Controls the visibility of labels.
+
+```javascript
+yAxis.showLabels(false);
+```
+
 #### `xAxis.hideLabels`
-#### `xAxis.firstLabel`
-#### `xAxis.lastLabel`
+
+Hides the labels on the axis.
+
+```javascript
+xAxis.hideLabels();
+```
+
+#### `xAxis.minorLabels([show])`
+
+Enables or disables labels for minor ticks.
+
+```javascript
+xAxis.minorLabels(false);
+```
+
+#### `xAxis.firstLabel([show])`
+
+Shows or hides the first label on the axis.
+
+```javascript
+xAxis.firstLabel(false);
+```
+
+#### `xAxis.lastLabel([show])`
+
+Shows or hides the last label on the axis.
+
+```javascript
+yAxis.lastLabel(true);
+```
+
 #### `xAxis.firstAndLastLabels`
-#### `xAxis.labelsColor`
-#### `xAxis.labelOffset`
-Sets the offset of the labels along the direction of the x-axis. A positive offset moves the labels to the right, while a negative offset moves the labels to the left. A value of 0 means no offset, and the label will be aligned with its position. If a function is provided as the offset parameter, it will be called for each label with the `value` and `index` of the label as parameters.
 
-Example usage:
-```js
+Shows or hides the first and last labels on the axis.
 
+```javascript
+xAxis.firstAndLastLabels(false);
+```
+
+#### `.labelOffset([offset])`
+
+Sets the offset of the axis label from the axis line.
+
+```javascript
+yAxis.labelOffset(15);
+```
+
+#### `.labelsColor([color])`
+
+Sets or retrieves the color of axis labels.
+
+```javascript
+xAxis.labelsColor("#444");
+```
+
+#### `.labelsClass([className])`
+
+Assigns a CSS class to the labels.
+
+```javascript
+yAxis.labelsClass("axis-label");
+```
+
+#### `.labelsPadding([padding])`
+
+Sets padding between the labels and the ticks.
+
+```javascript
+xAxis.labelsPadding(5);
 ```
 
 ### yAxis
+
 Y Axis (`yAxis`) runs vertically and it can be oriented at the left or right of the chart.
 
 ### chrtAxisRange
