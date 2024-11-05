@@ -131,8 +131,8 @@ Alternative methods for styling the axis line. These methods maintain compatibil
 
 ```js
 // These pairs of methods are equivalent
-xAxis.strokeWidth(2); // same as xAxis.width(2)
-xAxis.stroke("#f00"); // same as xAxis.color("#f00")
+xAxis().strokeWidth(2); // same as xAxis().width(2)
+xAxis().stroke("#f00"); // same as xAxis().color("#f00")
 ```
 
 #### `xAxis.showAxis([show])`
@@ -157,7 +157,7 @@ Sets the orientation of the X axis. If no argument is passed, the current orient
 
 ```js
 // Set the orientation of the X axis to "top"
-xAxis.orient("top");
+xAxis().orient("top");
 
 // Get the current orientation of the X axis
 const currentOrientation = xAxis.orient();
@@ -181,7 +181,7 @@ xAxis.format(
 Enables or disables minor ticks.
 
 ```javascript
-xAxis.minor(true);
+xAxis().minor(true);
 ```
 
 #### `.minorTicks([count])`
@@ -189,7 +189,7 @@ xAxis.minor(true);
 Defines the number of minor ticks between each major tick.
 
 ```javascript
-yAxis.minorTicks(3);
+xAxis().minorTicks(3);
 ```
 
 #### `.minorLabels([show])`
@@ -197,7 +197,7 @@ yAxis.minorTicks(3);
 Enables or disables labels for minor ticks.
 
 ```javascript
-xAxis.minorLabels(false);
+xAxis().minorLabels(false);
 ```
 
 #### `xAxis.zero()`
@@ -218,7 +218,7 @@ xAxis.zero(100);
 Sets or gets the label for the axis.
 
 ```javascript
-xAxis.label("X Axis Label");
+xAxis().label("X Axis Label");
 ```
 
 #### `xAxis.interval([value])`
@@ -331,7 +331,7 @@ xAxis.interval("day").format((d) =>
 Sets or gets the title for the axis.
 
 ```javascript
-xAxis.title("Main X Axis");
+xAxis().title("Main X Axis");
 ```
 
 ### Ticks
@@ -395,8 +395,6 @@ If `tickPosition` is specified, it sets the position of the ticks of the Axis ac
 ```js
 Chrt().add(xAxis().setTickPosition("inside").setTickPosition("outside"));
 ```
-
-#### `xAxis.filter([filter])`
 
 #### `xAxis.showTicks([filter])`
 
@@ -470,6 +468,46 @@ Hide ticks with values 10, 20, and 30:
 xAxis.hideTicks([10, 20, 30]);
 ```
 
+#### `xAxis.filter([filter])` / `xAxis.filterTicks([filter])`
+
+Alternative methods to `showTicks()`, these methods provide a more explicit way to filter ticks. Both `filter()` and `filterTicks()` are aliases and perform the same function as `showTicks()`. The parameter can be a function, a boolean value, a number, or an array of values.
+
+Example usage:
+
+Filter ticks using a function:
+
+```js
+// Show only even-indexed ticks
+xAxis.filter((d, i) => i % 2 === 0);
+// or
+xAxis.filterTicks((d, i) => i % 2 === 0);
+```
+
+Filter using a boolean:
+
+```js
+// Show all ticks
+xAxis.filter(true);
+// Hide all ticks
+xAxis.filter(false);
+```
+
+Filter by specific value:
+
+```js
+// Show only the tick with value 10
+xAxis.filter(10);
+```
+
+Filter using an array of values:
+
+```js
+// Show only ticks with values 10, 20, and 30
+xAxis.filter([10, 20, 30]);
+```
+
+Note: `filter()`, `filterTicks()`, and `showTicks()` all perform the same operation. `filter()` and `filterTicks()` are provided as more semantically explicit alternatives to `showTicks()`.
+
 #### `xAxis.firstTick([show])`
 
 Shows or hides the first tick on the axis. If `show` is `true`, only the first tick is shown and all other ticks are hidden. If `show` is `false`, only the first tick is hidden and all other ticks are shown.
@@ -531,7 +569,7 @@ xAxis.firstAndLastTicks(false);
 Enables or disables minor ticks.
 
 ```javascript
-xAxis.minor(true);
+xAxis().minor(true);
 ```
 
 #### `xAxis.minorTicks([count])`
@@ -635,7 +673,7 @@ yAxis.showLabels(false);
 Hides the labels on the axis.
 
 ```javascript
-xAxis.hideLabels();
+xAxis().hideLabels();
 ```
 
 #### `xAxis.minorLabels([show])`
@@ -643,7 +681,7 @@ xAxis.hideLabels();
 Enables or disables labels for minor ticks.
 
 ```javascript
-xAxis.minorLabels(false);
+xAxis().minorLabels(false);
 ```
 
 #### `xAxis.firstLabel([show])`
@@ -651,7 +689,7 @@ xAxis.minorLabels(false);
 Shows or hides the first label on the axis.
 
 ```javascript
-xAxis.firstLabel(false);
+xAxis().firstLabel(false);
 ```
 
 #### `xAxis.lastLabel([show])`
@@ -667,10 +705,10 @@ yAxis.lastLabel(true);
 Shows or hides the first and last labels on the axis.
 
 ```javascript
-xAxis.firstAndLastLabels(false);
+xAxis().firstAndLastLabels(false);
 ```
 
-#### `.labelOffset([offset])`
+#### `xAxis.labelOffset([offset])`
 
 Sets the offset of the axis label from the axis line.
 
@@ -683,7 +721,7 @@ yAxis.labelOffset(15);
 Sets or retrieves the color of axis labels.
 
 ```javascript
-xAxis.labelsColor("#444");
+xAxis().labelsColor("#444");
 ```
 
 #### `.labelsClass([className])`
@@ -699,7 +737,7 @@ yAxis.labelsClass("axis-label");
 Sets padding between the labels and the ticks.
 
 ```javascript
-xAxis.labelsPadding(5);
+xAxis().labelsPadding(5);
 ```
 
 ### yAxis
