@@ -15,8 +15,8 @@ One chart can have multiple Axes, and they can be oriented (left/right and top/b
 
 ### Observable Examples and Documentation:
 
-[Chrt Axes - Observable](https://observablehq.com/@chrt/axes?collection=@chrt/chrt)
-[Introducing Chrt - Observable](https://observablehq.com/@chrt/introducing-chrt?collection=@chrt/chrt)
+- [Chrt Axes - Observable](https://observablehq.com/@chrt/axes?collection=@chrt/chrt)
+- [Introducing Chrt - Observable](https://observablehq.com/@chrt/introducing-chrt?collection=@chrt/chrt)
 
 ## Installing
 
