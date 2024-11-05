@@ -795,6 +795,98 @@ Chrt().add(
 );
 ```
 
-### chrtAxisRange
-
 ### chrtAxisTitle
+
+The `chrtAxisTitle` component allows adding and customizing titles to axes. Multiple titles can be added to each axis.
+
+#### `chrtAxisTitle(text)`
+
+Creates a new axis title with the specified text.
+
+```js
+// Create a basic axis title
+const title = chrtAxisTitle("Axis Title");
+
+// Add title to an axis
+xAxis().add(chrtAxisTitle("X Axis Title"));
+```
+
+#### `chrtAxisTitle.color([value])` / `chrtAxisTitle.fill([value])`
+
+Sets or gets the color of the title text. Both methods are aliases and perform the same function.
+
+```js
+// Set title color to red
+chrtAxisTitle("Title").color("#f00");
+
+// Using fill alias
+chrtAxisTitle("Title").fill("#f00");
+```
+
+#### `chrtAxisTitle.align([value])`
+
+Sets or gets the horizontal alignment of the title. Accepted values are:
+
+- `"left"`: Aligns title to the left
+- `"center"`: Centers the title
+- `"right"` (default): Aligns title to the right
+
+```js
+// Center align the title
+chrtAxisTitle("Title").align("center");
+```
+
+#### `chrtAxisTitle.valign([value])`
+
+Sets or gets the vertical alignment of the title. Accepted values are:
+
+- `"top"` (default): Aligns title to the top
+- `"middle"`: Vertically centers the title
+- `"bottom"`: Aligns title to the bottom
+
+```js
+// Vertically center the title
+chrtAxisTitle("Title").valign("middle");
+```
+
+#### `chrtAxisTitle.offset([value])`
+
+Sets or gets the offset of the title from its default position. The offset can be specified as an object with `x` and `y` properties.
+
+```js
+// Move title 10 pixels right and 15 pixels down
+chrtAxisTitle("Title").offset({ x: 10, y: 15 });
+
+// Only adjust horizontal offset
+chrtAxisTitle("Title").offset({ x: -5 });
+
+// Only adjust vertical offset
+chrtAxisTitle("Title").offset({ y: 10 });
+```
+
+#### Complete Example
+
+Here's an example showing how to add and customize titles for both axes:
+
+```js
+Chrt()
+  .data([2, 0, 3, 10, 4, 2, 1])
+  .add(
+    yAxis().add(
+      chrtAxisTitle("Y axis title")
+        .align("right")
+        .valign("top")
+        .offset({ x: 10, y: 15 })
+        .color("#f00"),
+    ),
+  )
+  .add(
+    xAxis().add(
+      chrtAxisTitle("X axis title")
+        .align("right")
+        .valign("top")
+        .offset({ x: -5, y: -5 })
+        .color("#f00"),
+    ),
+  );
+```
