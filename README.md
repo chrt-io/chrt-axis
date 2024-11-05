@@ -697,7 +697,7 @@ xAxis().firstLabel(false);
 Shows or hides the last label on the axis.
 
 ```javascript
-yAxis.lastLabel(true);
+xAxis.lastLabel(true);
 ```
 
 #### `xAxis.firstAndLastLabels`
@@ -713,7 +713,7 @@ xAxis().firstAndLastLabels(false);
 Sets the offset of the axis label from the axis line.
 
 ```javascript
-yAxis.labelOffset(15);
+xAxis.labelOffset(15);
 ```
 
 #### `.labelsColor([color])`
@@ -729,7 +729,7 @@ xAxis().labelsColor("#444");
 Assigns a CSS class to the labels.
 
 ```javascript
-yAxis.labelsClass("axis-label");
+xAxis.labelsClass("axis-label");
 ```
 
 #### `.labelsPadding([padding])`
@@ -742,7 +742,58 @@ xAxis().labelsPadding(5);
 
 ### yAxis
 
-Y Axis (`yAxis`) runs vertically and it can be oriented at the left or right of the chart.
+Y Axis (`yAxis`) runs vertically and can be oriented at the left or right of the chart.
+
+#### `yAxis([tickCount[, scaleName]])`
+
+Works the same way as `xAxis()`. Creates a vertical axis with optional tick count and scale name.
+
+```js
+// Basic y-axis
+Chrt().add(yAxis());
+
+// Y-axis with 5 ticks
+Chrt().add(yAxis(5));
+
+// Y-axis with custom scale
+Chrt().add(yAxis(10, "customScaleName"));
+```
+
+#### `yAxis.orient([orientation])`
+
+Sets the orientation of the Y axis. Unlike xAxis which accepts "top"/"bottom", yAxis accepts "left"/"right" as valid orientations.
+
+```js
+// Position the y-axis on the right side
+yAxis.orient("right");
+
+// Position the y-axis on the left side (default)
+yAxis.orient("left");
+```
+
+#### Other Methods
+
+The yAxis component provides all the same methods as xAxis for controlling appearance, ticks, and labels. These include:
+
+- Styling methods: `width()`, `color()`, `stroke()`, `strokeWidth()`
+- Tick-related methods: `ticks()`, `ticksColor()`, `ticksWidth()`, `setTickLength()`, etc.
+- Label-related methods: `labels()`, `labelsColor()`, `labelsPadding()`, etc.
+- Visibility methods: `showAxis()`, `hideAxis()`, etc.
+
+These methods work exactly the same way as their xAxis counterparts, but operate on the vertical axis. For detailed documentation of these methods, see the [xAxis section](#xaxis).
+
+Example of common yAxis configurations:
+
+```js
+Chrt().add(
+  yAxis()
+    .orient("right") // Position on right side
+    .width(2) // Thicker axis line
+    .ticksLength(8) // Longer ticks
+    .labelsColor("#666") // Gray labels
+    .format((d) => d + "%"), // Add percentage symbol to labels
+);
+```
 
 ### chrtAxisRange
 
