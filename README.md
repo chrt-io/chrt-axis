@@ -122,6 +122,19 @@ If `colorValue` is specified, it sets the color of the Axis line accordingly. If
 Chrt().add(xAxis().color("#f00"));
 ```
 
+#### `xAxis.strokeWidth()` / `xAxis.stroke()`
+
+Alternative methods for styling the axis line. These methods maintain compatibility with SVG standard attribute names.
+
+- `strokeWidth()`: Alias for `width()`, sets the thickness of the axis line
+- `stroke()`: Alias for `color()`, sets the color of the axis line
+
+```js
+// These pairs of methods are equivalent
+xAxis.strokeWidth(2); // same as xAxis.width(2)
+xAxis.stroke("#f00"); // same as xAxis.color("#f00")
+```
+
 #### `xAxis.showAxis([show])`
 
 If `show` is specified, it sets visibility the Axis accordingly. If `show` is `null`, this function will return the current visibility of the Axis. If `show` is a `Boolean` or a `function`, `showAxis` will define whether the Axis is visible or not. Example usage:
@@ -208,7 +221,110 @@ Sets or gets the label for the axis.
 xAxis.label("X Axis Label");
 ```
 
-#### `xAxis.interval()`
+#### `xAxis.interval([value])`
+
+Sets the interval between ticks for time-based axes. This is particularly useful when working with time series data.
+
+Accepted values:
+
+- `"seconds"`: Show ticks at second intervals
+- `"minutes"`: Show ticks at minute intervals
+- `"hours"`: Show ticks at hour intervals
+- `"day"`: Show ticks at day intervals
+- `"bidiurnal"`: Show ticks every 2 days
+- `"week"`: Show ticks at week intervals
+- `"fortnight"`: Show ticks every 2 weeks
+- `"month"`: Show ticks at month intervals
+- `"year"`: Show ticks at year intervals
+
+```js
+// Show ticks at monthly intervals
+xAxis
+  .interval("month")
+  .format((d) =>
+    new Intl.DateTimeFormat("en-US", { month: "short" }).format(d),
+  );
+
+// Show ticks at hourly intervals
+xAxis
+  .interval("hours")
+  .format((d) =>
+    new Intl.DateTimeFormat("en-US", { hour: "numeric" }).format(d),
+  );
+
+// Show ticks at daily intervals
+xAxis
+  .interval("day")
+  .format((d) =>
+    new Intl.DateTimeFormat("en-US", { day: "numeric" }).format(d),
+  );
+```
+
+#### Time Formatting Examples
+
+When working with time-based axes, you can combine `interval()` and `format()` to create customized date/time displays. Here are common formatting patterns:
+
+```js
+// Format seconds
+xAxis.interval("seconds").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    minute: "numeric",
+    second: "numeric",
+  }).format(d),
+);
+
+// Format minutes
+xAxis.interval("minutes").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+  }).format(d),
+);
+
+// Format hours
+xAxis.interval("hours").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+  }).format(d),
+);
+
+// Format days
+xAxis.interval("day").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+  }).format(d),
+);
+
+// Format weeks
+xAxis.interval("week").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    week: "numeric",
+  }).format(d),
+);
+
+// Format months
+xAxis.interval("month").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+  }).format(d),
+);
+
+// Format years
+xAxis.interval("year").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+  }).format(d),
+);
+
+// Custom complex format
+xAxis.interval("day").format((d) =>
+  new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(d),
+);
+```
 
 #### `xAxis.title([titleText])`
 
@@ -228,7 +344,7 @@ If `count` is specified, it suggests the count for the number of ticks the Axis 
 Chrt().add(xAxis().ticks(10));
 ```
 
-#### `ticksColor([color])`
+#### `xAxis.ticksColor([color])`
 
 Sets the color of the ticks to the specified `color` value, or returns the current tick color if `color` is not provided.
 
@@ -246,7 +362,7 @@ xAxis.ticksColor((d, i) => {
 const currentColor = xAxis.ticksColor();
 ```
 
-#### `ticksWidth([width])`
+#### `xAxis.ticksWidth([width])`
 
 Sets the thickness of the ticks to the specified `width` value, or returns the current tick width if `width` is not provided.
 
@@ -428,7 +544,83 @@ yAxis.minorTicks(3);
 
 ### Labels
 
-#### `xAxis.labels([count])`
+#### `xAxis.labels([labels])`
+
+Sets or gets the labels for the axis.
+
+- If `labels` is not provided (`null` or `undefined`): Returns the current labels array
+- If `labels` is provided: Sets fixed labels for the axis and returns the axis instance
+
+```js
+// Get current labels
+const currentLabels = xAxis.labels();
+
+// Set fixed labels
+xAxis.labels(["A", "B", "C", "D"]);
+```
+
+#### `xAxis.labelsOffset([offset])`
+
+Sets the offset distance of labels from their default position. Can accept a single number or an array of [x, y] coordinates.
+
+```js
+// Set equal offset in both directions
+xAxis.labelsOffset(10);
+
+// Set different x and y offsets
+xAxis.labelsOffset([5, 10]);
+
+// Set offset using a function
+xAxis.labelsOffset((d, i) => [i * 2, i * 2]);
+```
+
+#### `xAxis.labelsPadding([padding])`
+
+Sets the padding space between labels and ticks. This is different from offset as it affects the spacing between the tick and its label.
+
+```js
+// Set padding to 10 pixels
+xAxis.labelsPadding(10);
+```
+
+#### `xAxis.labelsPosition([position])`
+
+Sets the position of all labels relative to the axis. Alternative to `setLabelPosition()`.
+
+```js
+// Position labels inside
+xAxis.labelsPosition("inside");
+
+// Position labels outside (default)
+xAxis.labelsPosition("outside");
+```
+
+#### `xAxis.labelsColor([color])`
+
+Sets the color of the axis labels. Can be a static color or a function that returns colors.
+
+```js
+// Set all labels to red
+xAxis.labelsColor("#ff0000");
+
+// Set alternating colors
+xAxis.labelsColor((d, i) => (i % 2 ? "#ff0000" : "#0000ff"));
+
+// Set color based on value
+xAxis.labelsColor((d) => (d > 50 ? "#ff0000" : "#0000ff"));
+```
+
+#### `xAxis.labelClass([className])` / `xAxis.labelsClass([className])`
+
+Sets or gets the CSS class(es) for the axis labels. Can be used to style labels using CSS.
+
+```js
+// Set a single class
+xAxis.labelClass("custom-label");
+
+// Set class using a function
+xAxis.labelClass((d, i) => (i % 2 ? "odd-label" : "even-label"));
+```
 
 #### `xAxis.showLabels`
 
